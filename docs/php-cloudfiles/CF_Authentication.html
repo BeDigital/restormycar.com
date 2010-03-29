@@ -28,8 +28,8 @@
 	<div id="ric">
 					<p><a href="../ric_Changelog.html">Changelog</a></p>
 					<p><a href="../ric_AUTHORS.html">AUTHORS</a></p>
-					<p><a href="../ric_COPYING.html">COPYING</a></p>
 					<p><a href="../ric_README.html">README</a></p>
+					<p><a href="../ric_COPYING.html">COPYING</a></p>
 			</div>
       <b>Packages:</b><br />
               <a href="../li_php-cloudfiles.html">php-cloudfiles</a><br />
@@ -94,6 +94,8 @@ Source Location: /cloudfiles.php<br /><br />
     <li><a href="../php-cloudfiles/CF_Authentication.html#method__construct">__construct</a></li>
     <li><a href="../php-cloudfiles/CF_Authentication.html#methodauthenticate">authenticate</a></li>
     <li><a href="../php-cloudfiles/CF_Authentication.html#methodauthenticated">authenticated</a></li>
+    <li><a href="../php-cloudfiles/CF_Authentication.html#methodexport_credentials">export_credentials</a></li>
+    <li><a href="../php-cloudfiles/CF_Authentication.html#methodload_cached_credentials">load_cached_credentials</a></li>
     <li><a href="../php-cloudfiles/CF_Authentication.html#methodsetDebug">setDebug</a></li>
     <li><a href="../php-cloudfiles/CF_Authentication.html#methodssl_use_cabundle">ssl_use_cabundle</a></li>
   </ul>
@@ -343,9 +345,9 @@ Class for handling Cloud Files Authentication, call it's <a href="../php-cloudfi
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>CF_Authentication __construct(
-string
-$username, string
-$api_key, [string
+[string
+$username = NULL], [string
+$api_key = NULL], [string
 $account = NULL], [string
 $auth_host = NULL])</code>
     </td></tr></table>
@@ -383,7 +385,7 @@ $auth_host = NULL])</code>
   </div>
   <hr />
 	<a name="methodauthenticate"></a>
-	<h3>method authenticate <span class="smalllinenumber">[line 196]</span></h3>
+	<h3>method authenticate <span class="smalllinenumber">[line 193]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -432,7 +434,7 @@ $version = DEFAULT_CF_API_VERSION])</code>
   </div>
   <hr />
 	<a name="methodauthenticated"></a>
-	<h3>method authenticated <span class="smalllinenumber">[line 228]</span></h3>
+	<h3>method authenticated <span class="smalllinenumber">[line 283]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -456,8 +458,92 @@ $version = DEFAULT_CF_API_VERSION])</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodexport_credentials"></a>
+	<h3>method export_credentials <span class="smalllinenumber">[line 264]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array export_credentials(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Grab Cloud Files info to be Cached for later use with the load_cached_credentials method.<br /><br /><p>Example:  <ol><li><div class="src-line">&nbsp;<span class="src-comm">#Create&nbsp;an&nbsp;Auth&nbsp;instance</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$auth&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-str">&quot;UserName&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;API_Key&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$auth</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Authentication.html#methodauthenticate">authenticate</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$array&nbsp;</span>=&nbsp;<span class="src-var">$auth</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Authentication.html#methodexport_credentials">export_credentials</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>of url's and an auth token.</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodload_cached_credentials"></a>
+	<h3>method load_cached_credentials <span class="smalllinenumber">[line 233]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>boolean load_cached_credentials(
+string
+$auth_token, string
+$storage_url, string
+$cdnm_url)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Use Cached Token and Storage URL's rather then grabbing from the Auth System<br /><br /><p>Example:  <ol><li><div class="src-line">&nbsp;<span class="src-comm">#Create&nbsp;an&nbsp;Auth&nbsp;instance</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$auth&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#Pass&nbsp;Cached&nbsp;URL's&nbsp;and&nbsp;Token&nbsp;as&nbsp;Args</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$auth</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Authentication.html#methodload_cached_credentials">load_cached_credentials</a><span class="src-sym">(</span><span class="src-str">&quot;auth_token&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;storage_url&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;cdn_management_url&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td><kbd>True</kbd> if successful</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>SyntaxException If any of the Required Arguments are missing</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$auth_token</b>&nbsp;&nbsp;</td>
+        <td>A Cloud Files Auth Token (Required)</td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$storage_url</b>&nbsp;&nbsp;</td>
+        <td>The Cloud Files Storage URL (Required)</td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$cdnm_url</b>&nbsp;&nbsp;</td>
+        <td>CDN Management URL (Required)</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodsetDebug"></a>
-	<h3>method setDebug <span class="smalllinenumber">[line 239]</span></h3>
+	<h3>method setDebug <span class="smalllinenumber">[line 294]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -484,7 +570,7 @@ $bool)</code>
   </div>
   <hr />
 	<a name="methodssl_use_cabundle"></a>
-	<h3>method ssl_use_cabundle <span class="smalllinenumber">[line 168]</span></h3>
+	<h3>method ssl_use_cabundle <span class="smalllinenumber">[line 165]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -514,7 +600,7 @@ $path = NULL])</code>
 
         <div class="credit">
 		    <hr />
-		    Documentation generated on Fri, 29 Jan 2010 02:01:18 +0000 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+		    Documentation generated on Fri, 26 Mar 2010 12:08:47 -0500 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
 	      </div>
       </td></tr></table>
     </td>

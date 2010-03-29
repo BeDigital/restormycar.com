@@ -28,8 +28,8 @@
 	<div id="ric">
 					<p><a href="../ric_Changelog.html">Changelog</a></p>
 					<p><a href="../ric_AUTHORS.html">AUTHORS</a></p>
-					<p><a href="../ric_COPYING.html">COPYING</a></p>
 					<p><a href="../ric_README.html">README</a></p>
+					<p><a href="../ric_COPYING.html">COPYING</a></p>
 			</div>
       <b>Packages:</b><br />
               <a href="../li_php-cloudfiles.html">php-cloudfiles</a><br />
@@ -119,7 +119,7 @@ Source Location: /cloudfiles.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 277]<br />
+[line 332]<br />
 Class for establishing connections to the Cloud Files storage system.<br /><br /><p>Connection instances are used to communicate with the storage system at  the account level; listing and deleting Containers and returning Container  instances.</p><p>Example:  <ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Create&nbsp;the&nbsp;authentication&nbsp;instance</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$auth&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-str">&quot;username&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;api_key&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
@@ -149,7 +149,7 @@ Class for establishing connections to the Cloud Files storage system.<br /><br /
 	<a name="var$cfs_auth"></a>
 	<p></p>
 	<h4>$cfs_auth = <span class="value"></span></h4>
-	<p>[line 281]</p>
+	<p>[line 336]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -173,7 +173,7 @@ Class for establishing connections to the Cloud Files storage system.<br /><br /
 	<a name="var$cfs_http"></a>
 	<p></p>
 	<h4>$cfs_http = <span class="value"></span></h4>
-	<p>[line 280]</p>
+	<p>[line 335]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -197,7 +197,7 @@ Class for establishing connections to the Cloud Files storage system.<br /><br /
 	<a name="var$dbug"></a>
 	<p></p>
 	<h4>$dbug = <span class="value"></span></h4>
-	<p>[line 279]</p>
+	<p>[line 334]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -227,7 +227,7 @@ Class for establishing connections to the Cloud Files storage system.<br /><br /
 
   <hr />
 	<a name="method__construct"></a>
-	<h3>constructor __construct <span class="smalllinenumber">[line 316]</span></h3>
+	<h3>constructor __construct <span class="smalllinenumber">[line 371]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -287,7 +287,7 @@ $servicenet = False])</code>
   </div>
   <hr />
 	<a name="methodclose"></a>
-	<h3>method close <span class="smalllinenumber">[line 355]</span></h3>
+	<h3>method close <span class="smalllinenumber">[line 410]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -313,7 +313,7 @@ $servicenet = False])</code>
   </div>
   <hr />
 	<a name="methodcreate_container"></a>
-	<h3>method create_container <span class="smalllinenumber">[line 414]</span></h3>
+	<h3>method create_container <span class="smalllinenumber">[line 469]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -357,7 +357,7 @@ $container_name = NULL])</code>
   </div>
   <hr />
 	<a name="methoddelete_container"></a>
-	<h3>method delete_container <span class="smalllinenumber">[line 471]</span></h3>
+	<h3>method delete_container <span class="smalllinenumber">[line 526]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -410,7 +410,7 @@ $container = NULL])</code>
   </div>
   <hr />
 	<a name="methodget_container"></a>
-	<h3>method get_container <span class="smalllinenumber">[line 533]</span></h3>
+	<h3>method get_container <span class="smalllinenumber">[line 588]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -459,7 +459,7 @@ $container_name = NULL])</code>
   </div>
   <hr />
 	<a name="methodget_containers"></a>
-	<h3>method get_containers <span class="smalllinenumber">[line 575]</span></h3>
+	<h3>method get_containers <span class="smalllinenumber">[line 630]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -514,7 +514,7 @@ $marker = NULL])</code>
   </div>
   <hr />
 	<a name="methodget_info"></a>
-	<h3>method get_info <span class="smalllinenumber">[line 380]</span></h3>
+	<h3>method get_info <span class="smalllinenumber">[line 435]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -549,7 +549,7 @@ $marker = NULL])</code>
   </div>
   <hr />
 	<a name="methodlist_containers"></a>
-	<h3>method list_containers <span class="smalllinenumber">[line 619]</span></h3>
+	<h3>method list_containers <span class="smalllinenumber">[line 674]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -605,7 +605,7 @@ $marker = NULL])</code>
   </div>
   <hr />
 	<a name="methodlist_containers_info"></a>
-	<h3>method list_containers_info <span class="smalllinenumber">[line 667]</span></h3>
+	<h3>method list_containers_info <span class="smalllinenumber">[line 722]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -670,7 +670,7 @@ $marker = NULL])</code>
   </div>
   <hr />
 	<a name="methodlist_public_containers"></a>
-	<h3>method list_public_containers <span class="smalllinenumber">[line 708]</span></h3>
+	<h3>method list_public_containers <span class="smalllinenumber">[line 763]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -710,7 +710,7 @@ $marker = NULL])</code>
   </div>
   <hr />
 	<a name="methodsetDebug"></a>
-	<h3>method setDebug <span class="smalllinenumber">[line 336]</span></h3>
+	<h3>method setDebug <span class="smalllinenumber">[line 391]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -737,7 +737,7 @@ $bool)</code>
   </div>
   <hr />
 	<a name="methodset_read_progress_function"></a>
-	<h3>method set_read_progress_function <span class="smalllinenumber">[line 758]</span></h3>
+	<h3>method set_read_progress_function <span class="smalllinenumber">[line 813]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -783,7 +783,7 @@ $func_name)</code>
   </div>
   <hr />
 	<a name="methodset_write_progress_function"></a>
-	<h3>method set_write_progress_function <span class="smalllinenumber">[line 794]</span></h3>
+	<h3>method set_write_progress_function <span class="smalllinenumber">[line 849]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -825,7 +825,7 @@ $func_name)</code>
   </div>
   <hr />
 	<a name="methodssl_use_cabundle"></a>
-	<h3>method ssl_use_cabundle <span class="smalllinenumber">[line 820]</span></h3>
+	<h3>method ssl_use_cabundle <span class="smalllinenumber">[line 875]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -855,7 +855,7 @@ $path = NULL])</code>
 
         <div class="credit">
 		    <hr />
-		    Documentation generated on Fri, 29 Jan 2010 02:01:19 +0000 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+		    Documentation generated on Fri, 26 Mar 2010 12:08:47 -0500 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
 	      </div>
       </td></tr></table>
     </td>

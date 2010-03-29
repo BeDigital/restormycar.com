@@ -1,3 +1,6 @@
+1.7.1 - Conrad Weidenkeller <conrad.weidenkeller@rackspace.com>
+  * Added Support for Auth Token Caching. 
+
 1.7.0 - Chmouel Boudjnah <chmouel.boudjnah@rackspace.co.uk>
   * Adjust api auth to rackspacecloud not mosso (mshuler).
 

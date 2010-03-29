@@ -1,7 +1,7 @@
 <?php
-$VERBOSE = False;                        # informational messages to stdout
-$USER    = "Username";                  # Mosso Username
-$API_KEY = "API Key";                   # User's API Access Key
+$VERBOSE = False;                       # informational messages to stdout
+$USER    = "";                          # Rackspace Cloud Username
+$API_KEY = "";				# Rackspace Cloud API Key
 $ACCOUNT = NULL;                        # DEPRECATED: account name
 $HOST    = NULL;                        # DEPRECATED: authentication host URL
 

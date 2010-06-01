@@ -1,4 +1,4 @@
-1.7.2 - Conrad Weidenkeller <conrad.weidenkeller@rackspace.com>
+1.7.3 - Conrad Weidenkeller <conrad.weidenkeller@rackspace.com>
   * Fixed a Small Bug where some users were seeing response bodies for PUTs
 
 1.7.1 - Conrad Weidenkeller <conrad.weidenkeller@rackspace.com>

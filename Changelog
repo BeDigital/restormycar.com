@@ -1,3 +1,6 @@
+1.7.2 - Conrad Weidenkeller <conrad.weidenkeller@rackspace.com>
+  * Fixed a Small Bug where some users were seeing response bodies for PUTs
+
 1.7.1 - Conrad Weidenkeller <conrad.weidenkeller@rackspace.com>
   * Added Support for Auth Token Caching. 
 

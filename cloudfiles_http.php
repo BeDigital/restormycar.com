@@ -29,7 +29,7 @@
  */
 require_once("cloudfiles_exceptions.php");
 
-define("PHP_CF_VERSION", "1.7.0");
+define("PHP_CF_VERSION", "1.7.2");
 define("USER_AGENT", sprintf("PHP-CloudFiles/%s", PHP_CF_VERSION));
 define("ACCOUNT_CONTAINER_COUNT", "X-Account-Container-Count");
 define("ACCOUNT_BYTES_USED", "X-Account-Bytes-Used");
@@ -1187,7 +1187,7 @@ class CF_Http
         if ($conn_type == "PUT_OBJ") {
             curl_setopt($ch, CURLOPT_PUT, 1);
             curl_setopt($ch, CURLOPT_READFUNCTION, array(&$this, '_read_cb'));
-	    //curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         }
         if ($conn_type == "HEAD") {
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "HEAD");

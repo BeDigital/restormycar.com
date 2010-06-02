@@ -156,7 +156,7 @@ class CF_Http
         # connect to SSL Websites. It is the first 3 letters of the PHP_OS
         # variable.
         $OS_CAFILE_NONUPDATED=array(
-            "win",
+            "win","dar"
         ); 
 
         if (in_array((strtolower (substr(PHP_OS, 0,3))), $OS_CAFILE_NONUPDATED))

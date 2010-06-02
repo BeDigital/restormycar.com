@@ -1,3 +1,6 @@
+1.7.4 - Conrad Weidenkeller <conrad.weidenkeller@rackspace.com>
+  * Added Manual SSL support for MacOSX users
+
 1.7.3 - Conrad Weidenkeller <conrad.weidenkeller@rackspace.com>
   * Fixed a Small Bug where some users were seeing response bodies for PUTs
 

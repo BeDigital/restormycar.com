@@ -2,8 +2,8 @@
 $VERBOSE = False;                       # informational messages to stdout
 $USER    = "";                          # Rackspace Cloud Username
 $API_KEY = "";				# Rackspace Cloud API Key
-$ACCOUNT = NULL;                        # DEPRECATED: account name
-$HOST    = NULL;                        # DEPRECATED: authentication host URL
+$ACCOUNT = NULL;                        # account name
+$HOST    = NULL;                        # authentication host URL
 
 # Allow override by environment variable
 if (isset($_ENV["RCLOUD_API_USER"])) {

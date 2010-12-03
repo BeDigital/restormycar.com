@@ -122,8 +122,8 @@ class CF_Authentication
      *
      * @param string $username Mosso username
      * @param string $api_key Mosso API Access Key
-     * @param string $account <b>Deprecated</b> <i>Account name</i>
-     * @param string $auth_host <b>Deprecated</b> <i>Authentication service URI</i>
+     * @param string $account  <i>Account name</i>
+     * @param string $auth_host  <i>Authentication service URI</i>
      */
     function __construct($username=NULL, $api_key=NULL, $account=NULL, $auth_host=NULL)
     {
@@ -757,13 +757,14 @@ class CF_Connection
      * )
      * </code>
      *
+     * @param bool $enabled_only Will list all containers ever CDN enabled if     * set to false or only currently enabled CDN containers if set to true.      * Defaults to false.
      * @return array list of published Container names
      * @throws InvalidResponseException unexpected response
      */
-    function list_public_containers()
+    function list_public_containers($enabled_only=False)
     {
         list($status, $reason, $containers) =
-                $this->cfs_http->list_cdn_containers();
+                $this->cfs_http->list_cdn_containers($enabled_only);
         #if ($status == 401 && $this->_re_auth()) {
         #    return $this->list_public_containers();
         #}

@@ -29,7 +29,7 @@
  */
 require_once("cloudfiles_exceptions.php");
 
-define("PHP_CF_VERSION", "1.7.4");
+define("PHP_CF_VERSION", "1.7.5");
 define("USER_AGENT", sprintf("PHP-CloudFiles/%s", PHP_CF_VERSION));
 define("ACCOUNT_CONTAINER_COUNT", "X-Account-Container-Count");
 define("ACCOUNT_BYTES_USED", "X-Account-Bytes-Used");
@@ -214,6 +214,7 @@ class CF_Http
         curl_setopt($curl_ch, CURLOPT_USERAGENT, USER_AGENT);
         curl_setopt($curl_ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($curl_ch, CURLOPT_HEADERFUNCTION,array(&$this,'_auth_hdr_cb'));
+        curl_setopt($curl_ch, CURLOPT_CONNECTTIMEOUT, 10);
         curl_setopt($curl_ch, CURLOPT_URL, $url);
         curl_exec($curl_ch);
         curl_close($curl_ch);
@@ -224,14 +225,21 @@ class CF_Http
 
     # (CDN) GET /v1/Account
     #
-    function list_cdn_containers()
+    function list_cdn_containers($enabled_only)
     {
         $conn_type = "GET_CALL";
-        $url_path = $this->_make_path("CDN", $container_name);
+        $url_path = $this->_make_path("CDN");
 
         $this->_write_callback_type = "TEXT_LIST";
-        $return_code = $this->_send_request($conn_type, $url_path);
-
+        if ($enabled_only)
+        {
+            $return_code = $this->_send_request($conn_type, $url_path . 
+            '/?enabled_only=true');
+        }
+        else
+        {
+            $return_code = $this->_send_request($conn_type, $url_path);
+        }
         if (!$return_code) {
             $this->error_str .= ": Failed to obtain valid HTTP response.";
             array(0,$this->error_str,array());
@@ -673,7 +681,7 @@ class CF_Http
         if ($return_code == 404) {
             return array($return_code,"Container not found.",0,0);
         }
-        if ($return_code == 204 or 200) {
+        if ($return_code == 204 || $return_code == 200) {
             return array($return_code,$this->response_reason,
                 $this->_container_object_count, $this->_container_bytes_used);
         }
@@ -865,7 +873,7 @@ class CF_Http
             return array($return_code, $this->response_reason,
                 NULL, NULL, NULL, NULL, array());
         }
-        if ($return_code == 204 or 200) {
+        if ($return_code == 204 || $return_code == 200) {
             return array($return_code,$this->response_reason,
                 $this->_obj_etag,
                 $this->_obj_last_modified,
@@ -1176,6 +1184,7 @@ class CF_Http
         }
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, True);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
         curl_setopt($ch, CURLOPT_MAXREDIRS, 4);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_HEADERFUNCTION, array(&$this, '_header_cb'));

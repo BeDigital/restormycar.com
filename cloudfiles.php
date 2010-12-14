@@ -76,8 +76,9 @@ require("cloudfiles_http.php");
 define("DEFAULT_CF_API_VERSION", 1);
 define("MAX_CONTAINER_NAME_LEN", 256);
 define("MAX_OBJECT_NAME_LEN", 1024);
-define("MAX_OBJECT_SIZE", 5*1024*1024*1024+1); # bigger than S3! ;-)
-
+define("MAX_OBJECT_SIZE", 5*1024*1024*1024+1);
+define("US_AUTHURL", "https://auth.api.rackspacecloud.com");
+define("UK_AUTHURL", "https://lon.auth.api.rackspacecloud.com");
 /**
  * Class for handling Cloud Files Authentication, call it's {@link authenticate()}
  * method to obtain authorized service urls and an authentication token.
@@ -87,6 +88,14 @@ define("MAX_OBJECT_SIZE", 5*1024*1024*1024+1); # bigger than S3! ;-)
  * # Create the authentication instance
  * #
  * $auth = new CF_Authentication("username", "api_key");
+ *
+ * # NOTE: For UK Customers please specify your AuthURL Manually
+ * # There is a Predfined constant to use EX:
+ * #
+ * # $auth = new CF_Authentication("username, "api_key", NULL, UK_AUTHURL);
+ * # Using the UK_AUTHURL keyword will force the api to use the UK AuthUrl.
+ * # rather then the US one. The NULL Is passed for legacy purposes and must
+ * # be passed to function correctly.
  *
  * # NOTE: Some versions of cURL include an outdated certificate authority (CA)
  * #       file.  This API ships with a newer version obtained directly from
@@ -125,7 +134,7 @@ class CF_Authentication
      * @param string $account  <i>Account name</i>
      * @param string $auth_host  <i>Authentication service URI</i>
      */
-    function __construct($username=NULL, $api_key=NULL, $account=NULL, $auth_host=NULL)
+    function __construct($username=NULL, $api_key=NULL, $account=NULL, $auth_host=US_AUTHURL)
     {
 
         $this->dbug = False;

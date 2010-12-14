@@ -27,6 +27,14 @@
 <li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$auth&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-str">&quot;username&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;api_key&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;NOTE:&nbsp;For&nbsp;UK&nbsp;Customers&nbsp;please&nbsp;specify&nbsp;your&nbsp;AuthURL&nbsp;Manually</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;There&nbsp;is&nbsp;a&nbsp;Predfined&nbsp;constant&nbsp;to&nbsp;use&nbsp;EX:</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;$auth&nbsp;=&nbsp;new&nbsp;CF_Authentication(&quot;username,&nbsp;&quot;api_key&quot;,&nbsp;NULL,&nbsp;UK_AUTHURL);</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Using&nbsp;the&nbsp;UK_AUTHURL&nbsp;keyword&nbsp;will&nbsp;force&nbsp;the&nbsp;api&nbsp;to&nbsp;use&nbsp;the&nbsp;UK&nbsp;AuthUrl.</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;rather&nbsp;then&nbsp;the&nbsp;US&nbsp;one.&nbsp;The&nbsp;NULL&nbsp;Is&nbsp;passed&nbsp;for&nbsp;legacy&nbsp;purposes&nbsp;and&nbsp;must</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;be&nbsp;passed&nbsp;to&nbsp;function&nbsp;correctly.</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;NOTE:&nbsp;Some&nbsp;versions&nbsp;of&nbsp;cURL&nbsp;include&nbsp;an&nbsp;outdated&nbsp;certificate&nbsp;authority&nbsp;(CA)</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file.&nbsp;&nbsp;This&nbsp;API&nbsp;ships&nbsp;with&nbsp;a&nbsp;newer&nbsp;version&nbsp;obtained&nbsp;directly&nbsp;from</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cURL's&nbsp;web&nbsp;site&nbsp;(http://curl.haxx.se).&nbsp;&nbsp;To&nbsp;use&nbsp;the&nbsp;newer&nbsp;CA&nbsp;bundle,</span></div></li>
@@ -39,7 +47,7 @@
 <li><div class="src-line">&nbsp;<span class="src-var">$auth</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Authentication.html#methodauthenticate">authenticate</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 </ol></div></p></p>
 		<p class="notes">
-			Located in <a class="field" href="_cloudfiles.php.html">/cloudfiles.php</a> (line <span class="field">105</span>)
+			Located in <a class="field" href="_cloudfiles.php.html">/cloudfiles.php</a> (line <span class="field">114</span>)
 		</p>
 		
 				
@@ -114,7 +122,7 @@
 												<div class="method-definition">
 											<span class="method-result">CF_Authentication</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											([<span class="var-type">string</span>&nbsp;<span class="var-name">$username</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$api_key</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$account</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$auth_host</span> = <span class="var-default">NULL</span>])
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$username</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$api_key</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$account</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$auth_host</span> = <span class="var-default">US_AUTHURL</span>])
 									</div>
 																<div class="method-definition">
 											<span class="method-result">boolean</span>
@@ -170,7 +178,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$account</span>
-						(line <span class="line-number">111</span>)
+						(line <span class="line-number">120</span>)
 		</span>
 	</div>
 
@@ -191,7 +199,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$api_key</span>
-						(line <span class="line-number">109</span>)
+						(line <span class="line-number">118</span>)
 		</span>
 	</div>
 
@@ -212,7 +220,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$auth_host</span>
-						(line <span class="line-number">110</span>)
+						(line <span class="line-number">119</span>)
 		</span>
 	</div>
 
@@ -233,7 +241,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$auth_token</span>
-						(line <span class="line-number">118</span>)
+						(line <span class="line-number">127</span>)
 		</span>
 	</div>
 
@@ -254,7 +262,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$cdnm_url</span>
-						(line <span class="line-number">117</span>)
+						(line <span class="line-number">126</span>)
 		</span>
 	</div>
 
@@ -275,7 +283,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$dbug</span>
-						(line <span class="line-number">107</span>)
+						(line <span class="line-number">116</span>)
 		</span>
 	</div>
 
@@ -296,7 +304,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$storage_url</span>
-						(line <span class="line-number">116</span>)
+						(line <span class="line-number">125</span>)
 		</span>
 	</div>
 
@@ -318,7 +326,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$username</span>
-						(line <span class="line-number">108</span>)
+						(line <span class="line-number">117</span>)
 		</span>
 	</div>
 
@@ -352,7 +360,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">128</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">137</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -363,7 +371,7 @@
 		<span class="method-name">
 			__construct
 		</span>
-					([<span class="var-type">string</span>&nbsp;<span class="var-name">$username</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$api_key</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$account</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$auth_host</span> = <span class="var-default">NULL</span>])
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$username</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$api_key</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$account</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$auth_host</span> = <span class="var-default">US_AUTHURL</span>])
 			</div>
 	
 			<ul class="parameters">
@@ -387,7 +395,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">authenticate</span> (line <span class="line-number">193</span>)
+		<span class="method-title">authenticate</span> (line <span class="line-number">202</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -426,7 +434,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">authenticated</span> (line <span class="line-number">283</span>)
+		<span class="method-title">authenticated</span> (line <span class="line-number">292</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -451,7 +459,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">export_credentials</span> (line <span class="line-number">264</span>)
+		<span class="method-title">export_credentials</span> (line <span class="line-number">273</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -480,7 +488,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">load_cached_credentials</span> (line <span class="line-number">233</span>)
+		<span class="method-title">load_cached_credentials</span> (line <span class="line-number">242</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -521,7 +529,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">setDebug</span> (line <span class="line-number">294</span>)
+		<span class="method-title">setDebug</span> (line <span class="line-number">303</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -547,7 +555,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">ssl_use_cabundle</span> (line <span class="line-number">165</span>)
+		<span class="method-title">ssl_use_cabundle</span> (line <span class="line-number">174</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -576,7 +584,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 03 Dec 2010 06:32:52 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 14 Dec 2010 05:19:53 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

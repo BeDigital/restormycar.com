@@ -183,7 +183,7 @@ class CF_Http
     function authenticate($user, $pass, $acct=NULL, $host=NULL)
     {
         $path = array();
-        if (isset($acct) || isset($host)) {
+        if (isset($acct)){
             $headers = array(
                 sprintf("%s: %s", AUTH_USER_HEADER_LEGACY, $user),
                 sprintf("%s: %s", AUTH_KEY_HEADER_LEGACY, $pass),
@@ -196,7 +196,7 @@ class CF_Http
                 sprintf("%s: %s", AUTH_USER_HEADER, $user),
                 sprintf("%s: %s", AUTH_KEY_HEADER, $pass),
                 );
-	    $path[] = "https://auth.api.rackspacecloud.com";
+	    $path[] = $host;
         }
 	$path[] = "v1.0";
         $url = implode("/", $path);

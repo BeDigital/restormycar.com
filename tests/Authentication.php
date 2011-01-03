@@ -66,6 +66,11 @@ class Authentication extends PHPUnit_Framework_TestCase
         if (ACCOUNT)
             $this->assertNotNull($this->auth->cdnm_url);
     }
+    public function testUkAuth()
+    {
+        $this->assertTrue(UK_AUTHURL 
+                          == 'https://lon.auth.api.rackspacecloud.com');
+    }
 }
 
 ?>

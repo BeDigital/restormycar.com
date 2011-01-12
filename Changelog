@@ -1,3 +1,6 @@
+1.7.6 - Chmouel Boudjnah <chmouel.boudjnah@rackspace.co.uk>
+  * Add Cloud UK Support (conrad.weidenkeller).
+
 1.7.5 - Conrad Weidenkeller <conrad.weidenkeller@rackspace.com>
   * Added the ability to list only currently enabled CDN containers
   * Added curl timeout to CF_Http

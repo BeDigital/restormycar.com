@@ -1280,9 +1280,9 @@ class CF_Http
         return $hdrs;
     }
 
-    private function _send_request($conn_type, $url_path, $hdrs=NULL, $method="GET")
+    private function _send_request($conn_type, $url_path, $hdrs=NULL, $method="GET", $force_new=False)
     {
-        $this->_init($conn_type);
+        $this->_init($conn_type, $force_new);
         $this->_reset_callback_vars();
         $headers = $this->_make_headers($hdrs);
 

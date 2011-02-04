@@ -365,7 +365,7 @@ class CF_Http
         
         $conn_type = "HEAD";
         $url_path = $this->_make_path("CDN", $container_name);
-        $return_code = $this->_send_request($conn_type, $url_path);
+        $return_code = $this->_send_request($conn_type, $url_path, NULL, "GET", True);
 
         if (!$return_code) {
             $this->error_str .= ": Failed to obtain valid HTTP response.";

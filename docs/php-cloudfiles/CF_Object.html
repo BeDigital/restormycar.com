@@ -1,424 +1,418 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  <html xmlns="http://www.w3.org/1999/xhtml">
-		<head>
-			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class CF_Object</title>
-			<link rel="stylesheet" href="../media/stylesheet.css" />
-			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
-		</head>
-		<body>
-			<div class="page-body">			
-<h2 class="class-name">Class CF_Object</h2>
+<html>
+<head>
+<title>Docs For Class CF_Object</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
 
-<a name="sec-description"></a>
-<div class="info-box">
-	<div class="info-box-title">Description</div>
-	<div class="nav-bar">
-					<span class="disabled">Description</span> |
-													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-						
-					</div>
-	<div class="info-box-body">
-        		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Object operations</p>
-<p class="description"><p>An Object is analogous to a file on a conventional filesystem. You can  read data from, or write data to your Objects. You can also associate  arbitrary metadata with them.</p></p>
-		<p class="notes">
-			Located in <a class="field" href="_cloudfiles.php.html">/cloudfiles.php</a> (line <span class="field">1594</span>)
-		</p>
-		
-				
-		<pre></pre>
-	
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">php-cloudfiles</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+        
+                                    
+                                                                      		  [ <a href="../classtrees_php-cloudfiles.html" class="menu">class tree: php-cloudfiles</a> ]
+		  [ <a href="../elementindex_php-cloudfiles.html" class="menu">index: php-cloudfiles</a> ]
+		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+	<div id="ric">
+					<p><a href="../ric_AUTHORS.html">AUTHORS</a></p>
+					<p><a href="../ric_COPYING.html">COPYING</a></p>
+					<p><a href="../ric_README.html">README</a></p>
+					<p><a href="../ric_Changelog.html">Changelog</a></p>
 			</div>
+      <b>Packages:</b><br />
+              <a href="../li_php-cloudfiles.html">php-cloudfiles</a><br />
+              <a href="../li_php-cloudfiles-exceptions.html">php-cloudfiles-exceptions</a><br />
+              <a href="../li_php-cloudfiles-http.html">php-cloudfiles-http</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../php-cloudfiles/_cloudfiles.php.html">		cloudfiles.php
+		</a><br>
+	  </div><br />
+      
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a><br />
+	    		<a href="../php-cloudfiles/CF_Connection.html">CF_Connection</a><br />
+	    		<a href="../php-cloudfiles/CF_Container.html">CF_Container</a><br />
+	    		<a href="../php-cloudfiles/CF_Object.html">CF_Object</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: CF_Object</h1>
+Source Location: /cloudfiles.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre></pre><br />
+<div class="description">Object operations</div><br /><br />
+
+
+
+
+
+
+        
+</td>
+
+<td valign="top">
+<h3><a href="#class_vars">Variables</a></h3>
+<ul>
+    <li><a href="../php-cloudfiles/CF_Object.html#var$container">$container</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#var$content_length">$content_length</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#var$content_type">$content_type</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#var$last_modified">$last_modified</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#var$metadata">$metadata</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#var$name">$name</a></li>
+  </ul>
+</td>
+
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../php-cloudfiles/CF_Object.html#method__construct">__construct</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#methodcompute_md5sum">compute_md5sum</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#methodgetETag">getETag</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#methodload_from_filename">load_from_filename</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#methodpublic_uri">public_uri</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#methodpurge_from_cdn">purge_from_cdn</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#methodread">read</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#methodsave_to_filename">save_to_filename</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#methodset_etag">set_etag</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#methodstream">stream</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#methodsync_metadata">sync_metadata</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#methodwrite">write</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#method_guess_content_type">_guess_content_type</a></li>
+    <li><a href="../php-cloudfiles/CF_Object.html#method__toString">__toString</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+
+
+
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 1624]<br />
+Object operations<br /><br /><p>An Object is analogous to a file on a conventional filesystem. You can  read data from, or write data to your Objects. You can also associate  arbitrary metadata with them.</p><br /></div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
+
+<hr />
+<a name="class_vars"></a>
+<h3>Class Variables</h3>
+<div class="tags">
+	<a name="var$container"></a>
+	<p></p>
+	<h4>$container = <span class="value"></span></h4>
+	<p>[line 1626]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
 </div>
 
-
-
-	<a name="sec-var-summary"></a>
-	<div class="info-box">
-		<div class="info-box-title">Variable Summary</span></div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
-							| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-								</div>
-		<div class="info-box-body">
-			<div class="var-summary">
-																																																																<div class="var-title">
-					<span class="var-type">mixed</span>
-					<a href="#$container" title="details" class="var-name">$container</a>
-				</div>
-																<div class="var-title">
-					<span class="var-type">mixed</span>
-					<a href="#$content_length" title="details" class="var-name">$content_length</a>
-				</div>
-																<div class="var-title">
-					<span class="var-type">mixed</span>
-					<a href="#$content_type" title="details" class="var-name">$content_type</a>
-				</div>
-																<div class="var-title">
-					<span class="var-type">mixed</span>
-					<a href="#$last_modified" title="details" class="var-name">$last_modified</a>
-				</div>
-																<div class="var-title">
-					<span class="var-type">mixed</span>
-					<a href="#$metadata" title="details" class="var-name">$metadata</a>
-				</div>
-																<div class="var-title">
-					<span class="var-type">mixed</span>
-					<a href="#$name" title="details" class="var-name">$name</a>
-				</div>
-											</div>
-		</div>
-	</div>
-
-	<a name="sec-method-summary"></a>
-	<div class="info-box">
-		<div class="info-box-title">Method Summary</span></div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-				 
-				|
-						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
-		</div>
-		<div class="info-box-body">			
-			<div class="method-summary">
-																																																																																																												
-												<div class="method-definition">
-											<span class="method-result">CF_Object</span>
-										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">&$container</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$force_exists</span> = <span class="var-default">False</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$dohead</span> = <span class="var-default">True</span>], <span class="var-type">obj</span>&nbsp;<span class="var-name">$container</span>)
-									</div>
-																<div class="method-definition">
-											<span class="method-result">string</span>
-										<a href="#compute_md5sum" title="details" class="method-name">compute_md5sum</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">&$data</span>, <span class="var-type">filename|obj|string</span>&nbsp;<span class="var-name">$data</span>)
-									</div>
-																<div class="method-definition">
-											<span class="method-result">string</span>
-										<a href="#getETag" title="details" class="method-name">getETag</a>
-										()
-									</div>
-																<div class="method-definition">
-											<span class="method-result">boolean</span>
-										<a href="#load_from_filename" title="details" class="method-name">load_from_filename</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$verify</span> = <span class="var-default">True</span>])
-									</div>
-																<div class="method-definition">
-											<span class="method-result">string</span>
-										<a href="#public_uri" title="details" class="method-name">public_uri</a>
-										()
-									</div>
-																<div class="method-definition">
-											<span class="method-result">string</span>
-										<a href="#read" title="details" class="method-name">read</a>
-											([<span class="var-type">array</span>&nbsp;<span class="var-name">$hdrs</span> = <span class="var-default">array()</span>])
-									</div>
-																<div class="method-definition">
-											<span class="method-result">boolean</span>
-										<a href="#save_to_filename" title="details" class="method-name">save_to_filename</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span>)
-									</div>
-																<div class="method-definition">
-											<span class="method-result">void</span>
-										<a href="#set_etag" title="details" class="method-name">set_etag</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$etag</span>)
-									</div>
-																<div class="method-definition">
-											<span class="method-result">string</span>
-										<a href="#stream" title="details" class="method-name">stream</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">&$fp</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$hdrs</span> = <span class="var-default">array()</span>], <span class="var-type">resource</span>&nbsp;<span class="var-name">$fp</span>)
-									</div>
-																<div class="method-definition">
-											<span class="method-result">boolean</span>
-										<a href="#sync_metadata" title="details" class="method-name">sync_metadata</a>
-										()
-									</div>
-																<div class="method-definition">
-											<span class="method-result">boolean</span>
-										<a href="#write" title="details" class="method-name">write</a>
-											([<span class="var-type">string|resource</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">NULL</span>], [<span class="var-type">float</span>&nbsp;<span class="var-name">$bytes</span> = <span class="var-default">0</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$verify</span> = <span class="var-default">True</span>])
-									</div>
-																<div class="method-definition">
-											<span class="method-result">boolean</span>
-										<a href="#_guess_content_type" title="details" class="method-name">_guess_content_type</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$handle</span>)
-									</div>
-																<div class="method-definition">
-											<span class="method-result">string</span>
-										<a href="#__toString" title="details" class="method-name">__toString</a>
-										()
-									</div>
-								</div>
-		</div>
-	</div>		
-
-	<a name="sec-vars"></a>
-	<div class="info-box">
-		<div class="info-box-title">Variables</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
-						
-			
-										| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-					</div>
-		<div class="info-box-body">
-			<a name="var$container" id="$container"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$container</span>
-						(line <span class="line-number">1596</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$content_length"></a>
+	<p></p>
+	<h4>$content_length = <span class="value"></span></h4>
+	<p>[line 1630]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
 </div>
-<a name="var$content_length" id="$content_length"><!-- --></A>
-<div class="evenrow">
 
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$content_length</span>
-						(line <span class="line-number">1600</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$content_type"></a>
+	<p></p>
+	<h4>$content_type = <span class="value"></span></h4>
+	<p>[line 1629]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
 </div>
-<a name="var$content_type" id="$content_type"><!-- --></A>
-<div class="oddrow">
 
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$content_type</span>
-						(line <span class="line-number">1599</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$last_modified"></a>
+	<p></p>
+	<h4>$last_modified = <span class="value"></span></h4>
+	<p>[line 1628]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
 </div>
-<a name="var$last_modified" id="$last_modified"><!-- --></A>
-<div class="evenrow">
 
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$last_modified</span>
-						(line <span class="line-number">1598</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$metadata"></a>
+	<p></p>
+	<h4>$metadata = <span class="value"></span></h4>
+	<p>[line 1631]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
 </div>
-<a name="var$metadata" id="$metadata"><!-- --></A>
-<div class="oddrow">
 
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$metadata</span>
-						(line <span class="line-number">1601</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$name"></a>
+	<p></p>
+	<h4>$name = <span class="value"></span></h4>
+	<p>[line 1627]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
 </div>
-<a name="var$name" id="$name"><!-- --></A>
-<div class="evenrow">
 
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$name</span>
-						(line <span class="line-number">1597</span>)
-		</span>
-	</div>
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+</div><br />
 
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
+
+  <hr />
+	<a name="method__construct"></a>
+	<h3>constructor __construct <span class="smalllinenumber">[line 1641]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>CF_Object __construct(
+
+&$container, string
+$name, [boolean
+$force_exists = False], [
+$dohead = True], obj
+$container)</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-	
-		
-		
+		Class constructor<br /><br /><br /><br />
 
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">obj&nbsp;&nbsp;</td>
+        <td><b>$container</b>&nbsp;&nbsp;</td>
+        <td>CF_Container instance</td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$name</b>&nbsp;&nbsp;</td>
+        <td>name of Object</td>
+      </tr>
+          <tr>
+        <td class="type">boolean&nbsp;&nbsp;</td>
+        <td><b>$force_exists</b>&nbsp;&nbsp;</td>
+        <td>if set, throw an error if Object doesn't exist</td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>&$container</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$dohead</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodcompute_md5sum"></a>
+	<h3>method compute_md5sum <span class="smalllinenumber">[line 2172]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string compute_md5sum(
+
+&$data, filename|obj|string
+$data)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Compute the MD5 checksum<br /><br /><p>Calculate the MD5 checksum on either a PHP resource or data.  The argument  may either be a local filename, open resource for reading, or a string.</p><p><strong>WARNING:</strong> if you are uploading a big file over a stream  it could get very slow to compute the md5 you probably want to  set the $verify parameter to False in the write() method and  compute yourself the md5 before if you have it.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>MD5 checksum hexidecimal string</td>
+  </tr>
+</table>
 </div>
-						
-		</div>
-	</div>
-	
-	<a name="sec-methods"></a>
-	<div class="info-box">
-		<div class="info-box-title">Methods</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
-						
-		</div>
-		<div class="info-box-body">
-			<A NAME='method_detail'></A>
+<br /><br />
 
-<a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
 	
-	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">1611</span>)
-	</div> 
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">filename|obj|string&nbsp;&nbsp;</td>
+        <td><b>$data</b>&nbsp;&nbsp;</td>
+        <td>filename, open resource, or string</td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>&$data</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetETag"></a>
+	<h3>method getETag <span class="smalllinenumber">[line 2153]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string getETag(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Class constructor</p>
+		Object's MD5 checksum<br /><br /><p>Accessor method for reading Object's private ETag attribute.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>MD5 checksum hexidecimal string</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
 	
-	<div class="method-signature">
-		<span class="method-result">CF_Object</span>
-		<span class="method-name">
-			__construct
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">&$container</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$force_exists</span> = <span class="var-default">False</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$dohead</span> = <span class="var-default">True</span>], <span class="var-type">obj</span>&nbsp;<span class="var-name">$container</span>)
-			</div>
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodload_from_filename"></a>
+	<h3>method load_from_filename <span class="smalllinenumber">[line 2043]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>boolean load_from_filename(
+string
+$filename, [boolean
+$verify = True])</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">obj</span>
-				<span class="var-name">$container</span><span class="var-description">: CF_Container instance</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$name</span><span class="var-description">: name of Object</span>			</li>
-					<li>
-				<span class="var-type">boolean</span>
-				<span class="var-name">$force_exists</span><span class="var-description">: if set, throw an error if Object doesn't exist</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">&$container</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$dohead</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodcompute_md5sum" id="compute_md5sum"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<span class="method-title">compute_md5sum</span> (line <span class="line-number">2110</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Compute the MD5 checksum</p>
-<p class="description"><p>Calculate the MD5 checksum on either a PHP resource or data.  The argument  may either be a local filename, open resource for reading, or a string.</p><p><strong>WARNING:</strong> if you are uploading a big file over a stream  it could get very slow to compute the md5 you probably want to  set the $verify parameter to False in the write() method and  compute yourself the md5 before if you have it.</p></p>
-	<ul class="tags">
-				<li><span class="field">return:</span> MD5 checksum hexidecimal string</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			compute_md5sum
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">&$data</span>, <span class="var-type">filename|obj|string</span>&nbsp;<span class="var-name">$data</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">filename|obj|string</span>
-				<span class="var-name">$data</span><span class="var-description">: filename, open resource, or string</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">&$data</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodgetETag" id="getETag"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<span class="method-title">getETag</span> (line <span class="line-number">2091</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Object's MD5 checksum</p>
-<p class="description"><p>Accessor method for reading Object's private ETag attribute.</p></p>
-	<ul class="tags">
-				<li><span class="field">return:</span> MD5 checksum hexidecimal string</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			getETag
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodload_from_filename" id="load_from_filename"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<span class="method-title">load_from_filename</span> (line <span class="line-number">2013</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Upload Object data from local filename</p>
-<p class="description"><p>This is a convenience function to upload the data from a local file.  A  True value for $verify will cause the method to compute the Object's MD5  checksum prior to uploading.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication/connection/container&nbsp;code&nbsp;excluded</span></div></li>
+		Upload Object data from local filename<br /><br /><p>This is a convenience function to upload the data from a local file.  A  True value for $verify will cause the method to compute the Object's MD5  checksum prior to uploading.</p><p>Example:  <ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication/connection/container&nbsp;code&nbsp;excluded</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;see&nbsp;previous&nbsp;examples</span></div></li>
 <li><div class="src-line">&nbsp;</div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$my_docs&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><span class="src-id">get_container</span><span class="src-sym">(</span><span class="src-str">&quot;documents&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
@@ -427,76 +421,136 @@
 <li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Upload&nbsp;my&nbsp;local&nbsp;README's&nbsp;content</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$doc</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Object.html#methodload_from_filename">load_from_filename</a><span class="src-sym">(</span><span class="src-str">&quot;/home/ej/cloudfiles/readme&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-</ol></div></p></p>
-	<ul class="tags">
-				<li><span class="field">return:</span> <kbd>True</kbd> if data uploaded successfully</li>
-				<li><span class="field">throws:</span> SyntaxException missing required parameters</li>
-				<li><span class="field">throws:</span> BadContentTypeException if no Content-Type was/could be set</li>
-				<li><span class="field">throws:</span> MisMatchedChecksumException $verify is set and checksums unequal</li>
-				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
-				<li><span class="field">throws:</span> IOException error opening file</li>
-			</ul>
+</ol></p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td><kbd>True</kbd> if data uploaded successfully</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>SyntaxException missing required parameters</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>BadContentTypeException if no Content-Type was/could be set</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>MisMatchedChecksumException $verify is set and checksums unequal</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>InvalidResponseException unexpected response</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>IOException error opening file</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
 	
-	<div class="method-signature">
-		<span class="method-result">boolean</span>
-		<span class="method-name">
-			load_from_filename
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$verify</span> = <span class="var-default">True</span>])
-			</div>
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$filename</b>&nbsp;&nbsp;</td>
+        <td>full path to local file</td>
+      </tr>
+          <tr>
+        <td class="type">boolean&nbsp;&nbsp;</td>
+        <td><b>$verify</b>&nbsp;&nbsp;</td>
+        <td>enable local/remote MD5 checksum validation</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodpublic_uri"></a>
+	<h3>method public_uri <span class="smalllinenumber">[line 1763]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string public_uri(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$filename</span><span class="var-description">: full path to local file</span>			</li>
-					<li>
-				<span class="var-type">boolean</span>
-				<span class="var-name">$verify</span><span class="var-description">: enable local/remote MD5 checksum validation</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodpublic_uri" id="public_uri"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<span class="method-title">public_uri</span> (line <span class="line-number">1733</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">String representation of the Object's public URI</p>
-<p class="description"><p>A string representing the Object's public URI assuming that it's  parent Container is CDN-enabled.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication/connection/container&nbsp;code&nbsp;excluded</span></div></li>
+		String representation of the Object's public URI<br /><br /><p>A string representing the Object's public URI assuming that it's  parent Container is CDN-enabled.</p><p>Example:  <ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication/connection/container&nbsp;code&nbsp;excluded</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;see&nbsp;previous&nbsp;examples</span></div></li>
 <li><div class="src-line">&nbsp;</div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Print&nbsp;out&nbsp;the&nbsp;Object's&nbsp;CDN&nbsp;URI&nbsp;(if&nbsp;it&nbsp;has&nbsp;one)&nbsp;in&nbsp;an&nbsp;HTML&nbsp;img-tag</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
 <li><div class="src-line">&nbsp;print&nbsp;<span class="src-str">&quot;</span><span class="src-str">&lt;img&nbsp;src='<span class="src-var">$pic</span><span class="src-sym">-&gt;</span><span class="src-id">public_uri</span>()'&nbsp;/&gt;\n</span><span class="src-str">&quot;</span><span class="src-sym">;</span></div></li>
-</ol></div></p></p>
-	<ul class="tags">
-				<li><span class="field">return:</span> Object's public URI or NULL</li>
-			</ul>
+</ol></p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>Object's public URI or NULL</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
 	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			public_uri
-		</span>
-				()
-			</div>
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodpurge_from_cdn"></a>
+	<h3>method purge_from_cdn <span class="smalllinenumber">[line 2116]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>boolean purge_from_cdn(
+[
+$email = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-		
-			
-	</div>
-<a name="methodread" id="read"><!-- --></a>
-<div class="evenrow">
+		Purge this Object from CDN Cache.<br /><br /><p>Example:</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>True if successful</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>CDNNotEnabledException if CDN Is not enabled on this connection</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>InvalidResponseException if the response expected is not returned</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
 	
-	<div class="method-header">
-		<span class="method-title">read</span> (line <span class="line-number">1769</span>)
-	</div> 
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$email</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodread"></a>
+	<h3>method read <span class="smalllinenumber">[line 1799]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string read(
+[array
+$hdrs = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Read the remote Object's data</p>
-<p class="description"><p>Returns the Object's data.  This is useful for smaller Objects such  as images or office documents.  Object's with larger content should use  the stream() method below.</p><p>Pass in $hdrs array to set specific custom HTTP headers such as  If-Match, If-None-Match, If-Modified-Since, Range, etc.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication/connection/container&nbsp;code&nbsp;excluded</span></div></li>
+		Read the remote Object's data<br /><br /><p>Returns the Object's data.  This is useful for smaller Objects such  as images or office documents.  Object's with larger content should use  the stream() method below.</p><p>Pass in $hdrs array to set specific custom HTTP headers such as  If-Match, If-None-Match, If-Modified-Since, Range, etc.</p><p>Example:  <ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication/connection/container&nbsp;code&nbsp;excluded</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;see&nbsp;previous&nbsp;examples</span></div></li>
 <li><div class="src-line">&nbsp;</div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$my_docs&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><span class="src-id">get_container</span><span class="src-sym">(</span><span class="src-str">&quot;documents&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
@@ -506,38 +560,46 @@
 <li><div class="src-line">&nbsp;</div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Or&nbsp;see&nbsp;stream()&nbsp;below&nbsp;for&nbsp;a&nbsp;different&nbsp;example.</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
-</ol></div></p></p>
-	<ul class="tags">
-				<li><span class="field">return:</span> Object's data</li>
-				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
-			</ul>
+</ol></p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>Object's data</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>InvalidResponseException unexpected response</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
 	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			read
-		</span>
-					([<span class="var-type">array</span>&nbsp;<span class="var-name">$hdrs</span> = <span class="var-default">array()</span>])
-			</div>
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$hdrs</b>&nbsp;&nbsp;</td>
+        <td>user-defined headers (Range, If-Match, etc.)</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsave_to_filename"></a>
+	<h3>method save_to_filename <span class="smalllinenumber">[line 2088]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>boolean save_to_filename(
+string
+$filename)</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$hdrs</span><span class="var-description">: user-defined headers (Range, If-Match, etc.)</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodsave_to_filename" id="save_to_filename"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<span class="method-title">save_to_filename</span> (line <span class="line-number">2058</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Save Object's data to local filename</p>
-<p class="description"><p>Given a local filename, the Object's data will be written to the newly  created file.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication/connection/container&nbsp;code&nbsp;excluded</span></div></li>
+		Save Object's data to local filename<br /><br /><p>Given a local filename, the Object's data will be written to the newly  created file.</p><p>Example:  <ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication/connection/container&nbsp;code&nbsp;excluded</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;see&nbsp;previous&nbsp;examples</span></div></li>
 <li><div class="src-line">&nbsp;</div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Whoops!&nbsp;&nbsp;I&nbsp;deleted&nbsp;my&nbsp;local&nbsp;README,&nbsp;let&nbsp;me&nbsp;download/save&nbsp;it</span></div></li>
@@ -546,66 +608,78 @@
 <li><div class="src-line">&nbsp;<span class="src-var">$doc&nbsp;</span>=&nbsp;<span class="src-var">$my_docs</span><span class="src-sym">-&gt;</span><span class="src-id">get_object</span><span class="src-sym">(</span><span class="src-str">&quot;README&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;</div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$doc</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Object.html#methodsave_to_filename">save_to_filename</a><span class="src-sym">(</span><span class="src-str">&quot;/home/ej/cloudfiles/readme.restored&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-</ol></div></p></p>
-	<ul class="tags">
-				<li><span class="field">return:</span> <kbd>True</kbd> if successful</li>
-				<li><span class="field">throws:</span> IOException error opening file</li>
-				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
-			</ul>
+</ol></p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td><kbd>True</kbd> if successful</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>IOException error opening file</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>InvalidResponseException unexpected response</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
 	
-	<div class="method-signature">
-		<span class="method-result">boolean</span>
-		<span class="method-name">
-			save_to_filename
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span>)
-			</div>
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$filename</b>&nbsp;&nbsp;</td>
+        <td>name of local file to write data to</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodset_etag"></a>
+	<h3>method set_etag <span class="smalllinenumber">[line 2140]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void set_etag(
+string
+$etag)</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$filename</span><span class="var-description">: name of local file to write data to</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodset_etag" id="set_etag"><!-- --></a>
-<div class="evenrow">
+		Set Object's MD5 checksum<br /><br /><p>Manually set the Object's ETag.  Including the ETag is mandatory for  Cloud Files to perform end-to-end verification.  Omitting the ETag forces  the user to handle any data integrity checks.</p><br /><br /><br />
+
 	
-	<div class="method-header">
-		<span class="method-title">set_etag</span> (line <span class="line-number">2078</span>)
-	</div> 
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$etag</b>&nbsp;&nbsp;</td>
+        <td>MD5 checksum hexidecimal string</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodstream"></a>
+	<h3>method stream <span class="smalllinenumber">[line 1856]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string stream(
+
+&$fp, [array
+$hdrs = array()], resource
+$fp)</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Set Object's MD5 checksum</p>
-<p class="description"><p>Manually set the Object's ETag.  Including the ETag is mandatory for  Cloud Files to perform end-to-end verification.  Omitting the ETag forces  the user to handle any data integrity checks.</p></p>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			set_etag
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$etag</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$etag</span><span class="var-description">: MD5 checksum hexidecimal string</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodstream" id="stream"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<span class="method-title">stream</span> (line <span class="line-number">1826</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Streaming read of Object's data</p>
-<p class="description"><p>Given an open PHP resource (see PHP's fopen() method), fetch the Object's  data and write it to the open resource handle.  This is useful for  streaming an Object's content to the browser (videos, images) or for  fetching content to a local file.</p><p>Pass in $hdrs array to set specific custom HTTP headers such as  If-Match, If-None-Match, If-Modified-Since, Range, etc.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;#&nbsp;...&nbsp;authentication/connection/container&nbsp;code&nbsp;excluded</div></li>
+		Streaming read of Object's data<br /><br /><p>Given an open PHP resource (see PHP's fopen() method), fetch the Object's  data and write it to the open resource handle.  This is useful for  streaming an Object's content to the browser (videos, images) or for  fetching content to a local file.</p><p>Pass in $hdrs array to set specific custom HTTP headers such as  If-Match, If-None-Match, If-Modified-Since, Range, etc.</p><p>Example:  <ol><li><div class="src-line">&nbsp;#&nbsp;...&nbsp;authentication/connection/container&nbsp;code&nbsp;excluded</div></li>
 <li><div class="src-line">&nbsp;#&nbsp;...&nbsp;see&nbsp;previous&nbsp;examples</div></li>
 <li><div class="src-line">&nbsp;</div></li>
 <li><div class="src-line">&nbsp;#&nbsp;Assuming&nbsp;this&nbsp;is&nbsp;a&nbsp;web&nbsp;script&nbsp;to&nbsp;display&nbsp;the&nbsp;README&nbsp;to&nbsp;the</div></li>
@@ -627,44 +701,55 @@
 <li><div class="src-line">&nbsp;</div></li>
 <li><div class="src-line">&nbsp;#&nbsp;See&nbsp;read()&nbsp;above&nbsp;for&nbsp;a&nbsp;more&nbsp;simple&nbsp;example.</div></li>
 <li><div class="src-line">&nbsp;#</div></li>
-</ol></div></p></p>
-	<ul class="tags">
-				<li><span class="field">return:</span> Object's data</li>
-				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
-			</ul>
+</ol></p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>Object's data</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>InvalidResponseException unexpected response</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
 	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			stream
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">&$fp</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$hdrs</span> = <span class="var-default">array()</span>], <span class="var-type">resource</span>&nbsp;<span class="var-name">$fp</span>)
-			</div>
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">resource&nbsp;&nbsp;</td>
+        <td><b>$fp</b>&nbsp;&nbsp;</td>
+        <td>open resource for writing data to</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$hdrs</b>&nbsp;&nbsp;</td>
+        <td>user-defined headers (Range, If-Match, etc.)</td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>&$fp</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsync_metadata"></a>
+	<h3>method sync_metadata <span class="smalllinenumber">[line 1901]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>boolean sync_metadata(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">resource</span>
-				<span class="var-name">$fp</span><span class="var-description">: open resource for writing data to</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$hdrs</span><span class="var-description">: user-defined headers (Range, If-Match, etc.)</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">&$fp</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodsync_metadata" id="sync_metadata"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<span class="method-title">sync_metadata</span> (line <span class="line-number">1871</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Store new Object metadata</p>
-<p class="description"><p>Write's an Object's metadata to the remote Object.  This will overwrite  an prior Object metadata.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication/connection/container&nbsp;code&nbsp;excluded</span></div></li>
+		Store new Object metadata<br /><br /><p>Write's an Object's metadata to the remote Object.  This will overwrite  an prior Object metadata.</p><p>Example:  <ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication/connection/container&nbsp;code&nbsp;excluded</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;see&nbsp;previous&nbsp;examples</span></div></li>
 <li><div class="src-line">&nbsp;</div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$my_docs&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><span class="src-id">get_container</span><span class="src-sym">(</span><span class="src-str">&quot;documents&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
@@ -681,33 +766,38 @@
 <li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Push&nbsp;the&nbsp;new&nbsp;metadata&nbsp;up&nbsp;to&nbsp;the&nbsp;storage&nbsp;system</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$doc</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Object.html#methodsync_metadata">sync_metadata</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-</ol></div></p></p>
-	<ul class="tags">
-				<li><span class="field">return:</span> <kbd>True</kbd> if successful, <kbd>False</kbd> otherwise</li>
-				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
-			</ul>
+</ol></p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td><kbd>True</kbd> if successful, <kbd>False</kbd> otherwise</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>InvalidResponseException unexpected response</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
 	
-	<div class="method-signature">
-		<span class="method-result">boolean</span>
-		<span class="method-name">
-			sync_metadata
-		</span>
-				()
-			</div>
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodwrite"></a>
+	<h3>method write <span class="smalllinenumber">[line 1947]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>boolean write(
+[string|resource
+$data = NULL], [float
+$bytes = 0], [boolean
+$verify = True])</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-		
-			
-	</div>
-<a name="methodwrite" id="write"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<span class="method-title">write</span> (line <span class="line-number">1917</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Upload Object's data to Cloud Files</p>
-<p class="description"><p>Write data to the remote Object.  The $data argument can either be a  PHP resource open for reading (see PHP's fopen() method) or an in-memory  variable.  If passing in a PHP resource, you must also include the $bytes  parameter.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication/connection/container&nbsp;code&nbsp;excluded</span></div></li>
+		Upload Object's data to Cloud Files<br /><br /><p>Write data to the remote Object.  The $data argument can either be a  PHP resource open for reading (see PHP's fopen() method) or an in-memory  variable.  If passing in a PHP resource, you must also include the $bytes  parameter.</p><p>Example:  <ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication/connection/container&nbsp;code&nbsp;excluded</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;see&nbsp;previous&nbsp;examples</span></div></li>
 <li><div class="src-line">&nbsp;</div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$my_docs&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><span class="src-id">get_container</span><span class="src-sym">(</span><span class="src-str">&quot;documents&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
@@ -716,100 +806,127 @@
 <li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Upload&nbsp;placeholder&nbsp;text&nbsp;in&nbsp;my&nbsp;README</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$doc</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Object.html#methodwrite">write</a><span class="src-sym">(</span><span class="src-str">&quot;This&nbsp;is&nbsp;just&nbsp;placeholder&nbsp;text&nbsp;for&nbsp;now...&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-</ol></div></p></p>
-	<ul class="tags">
-				<li><span class="field">return:</span> <kbd>True</kbd> when data uploaded successfully</li>
-				<li><span class="field">throws:</span> SyntaxException missing required parameters</li>
-				<li><span class="field">throws:</span> BadContentTypeException if no Content-Type was/could be set</li>
-				<li><span class="field">throws:</span> MisMatchedChecksumException $verify is set and checksums unequal</li>
-				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
-			</ul>
+</ol></p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td><kbd>True</kbd> when data uploaded successfully</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>SyntaxException missing required parameters</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>BadContentTypeException if no Content-Type was/could be set</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>MisMatchedChecksumException $verify is set and checksums unequal</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>InvalidResponseException unexpected response</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
 	
-	<div class="method-signature">
-		<span class="method-result">boolean</span>
-		<span class="method-name">
-			write
-		</span>
-					([<span class="var-type">string|resource</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">NULL</span>], [<span class="var-type">float</span>&nbsp;<span class="var-name">$bytes</span> = <span class="var-default">0</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$verify</span> = <span class="var-default">True</span>])
-			</div>
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string|resource&nbsp;&nbsp;</td>
+        <td><b>$data</b>&nbsp;&nbsp;</td>
+        <td>string or open resource</td>
+      </tr>
+          <tr>
+        <td class="type">float&nbsp;&nbsp;</td>
+        <td><b>$bytes</b>&nbsp;&nbsp;</td>
+        <td>amount of data to upload (required for resources)</td>
+      </tr>
+          <tr>
+        <td class="type">boolean&nbsp;&nbsp;</td>
+        <td><b>$verify</b>&nbsp;&nbsp;</td>
+        <td>generate, send, and compare MD5 checksums</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="method_guess_content_type"></a>
+	<h3>method _guess_content_type <span class="smalllinenumber">[line 1701]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>boolean _guess_content_type(
+string
+$handle)</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string|resource</span>
-				<span class="var-name">$data</span><span class="var-description">: string or open resource</span>			</li>
-					<li>
-				<span class="var-type">float</span>
-				<span class="var-name">$bytes</span><span class="var-description">: amount of data to upload (required for resources)</span>			</li>
-					<li>
-				<span class="var-type">boolean</span>
-				<span class="var-name">$verify</span><span class="var-description">: generate, send, and compare MD5 checksums</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="method_guess_content_type" id="_guess_content_type"><!-- --></a>
-<div class="evenrow">
+		Internal check to get the proper mimetype.<br /><br /><p>This function would go over the available PHP methods to get  the MIME type.</p><p>By default it will try to use the PHP fileinfo library which is  available from PHP 5.3 or as an PECL extension  (http://pecl.php.net/package/Fileinfo).</p><p>It will get the magic file by default from the system wide file  which is usually available in /usr/share/magic on Unix or try  to use the file specified in the source directory of the API  (share directory).</p><p>if fileinfo is not available it will try to use the internal  mime_content_type function.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td><kbd>True</kbd> if successful</td>
+  </tr>
+  <tr>
+    <td><b>throws:</b>&nbsp;&nbsp;</td><td>BadContentTypeException</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
 	
-	<div class="method-header">
-		<span class="method-title">_guess_content_type</span> (line <span class="line-number">1671</span>)
-	</div> 
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$handle</b>&nbsp;&nbsp;</td>
+        <td>name of file or buffer to guess the type from</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="method__toString"></a>
+	<h3>method __toString <span class="smalllinenumber">[line 1674]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string __toString(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Internal check to get the proper mimetype.</p>
-<p class="description"><p>This function would go over the available PHP methods to get  the MIME type.</p><p>By default it will try to use the PHP fileinfo library which is  available from PHP 5.3 or as an PECL extension  (http://pecl.php.net/package/Fileinfo).</p><p>It will get the magic file by default from the system wide file  which is usually available in /usr/share/magic on Unix or try  to use the file specified in the source directory of the API  (share directory).</p><p>if fileinfo is not available it will try to use the internal  mime_content_type function.</p></p>
-	<ul class="tags">
-				<li><span class="field">return:</span> <kbd>True</kbd> if successful</li>
-				<li><span class="field">throws:</span> BadContentTypeException</li>
-			</ul>
+		String representation of Object<br /><br /><p>Pretty print the Object's location and name</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>Object information</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
 	
-	<div class="method-signature">
-		<span class="method-result">boolean</span>
-		<span class="method-name">
-			_guess_content_type
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$handle</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$handle</span><span class="var-description">: name of file or buffer to guess the type from</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="method__toString" id="__toString"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<span class="method-title">__toString</span> (line <span class="line-number">1644</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">String representation of Object</p>
-<p class="description"><p>Pretty print the Object's location and name</p></p>
-	<ul class="tags">
-				<li><span class="field">return:</span> Object information</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			__toString
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-						
-		</div>
-	</div>
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
 
 
-	<p class="notes" id="credit">
-		Documentation generated on Tue, 14 Dec 2010 05:19:56 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
-	</p>
-	</div></body>
+        <div class="credit">
+		    <hr />
+		    Documentation generated on Thu, 24 Feb 2011 15:05:57 -0600 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
 </html>

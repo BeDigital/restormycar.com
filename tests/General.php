@@ -29,7 +29,7 @@ class CloudFileAccountInfoTest extends PHPUnit_Framework_TestCase
 
         $this->container = $this->conn->create_container("php-cloudfiles");
         $this->o1 = $this->container->create_object("fuzzy.txt");        
-    }    
+    } 
 
     public function testListContainers()
     {        
@@ -392,7 +392,17 @@ class CloudFileAccountInfoTest extends PHPUnit_Framework_TestCase
         $ascii_cont = $this->conn->create_container($n1);
         $cnames[$n1] = $ascii_cont;
         $this->assertNotNull($ascii_cont);
-
+        # ======= Test CDN Edge Purge =================================
+        $cf_purge_container = ".__cf__purge_test";
+        $cf_purge_obj = "foo";
+        $cont = $this->conn->create_container($cf_purge_container);
+        $cont->make_public();
+        $this->assertTrue($cont->purge_from_cdn());
+        $obj = $cont->create_object($cf_purge_obj);
+        $obj->write('asdf');
+        $this->assertTrue($obj->purge_from_cdn());
+        $cont->delete_object($cf_purge_obj);
+        $this->conn->delete_container($cf_purge_container);
         # ======= CREATE NEW GOOP CONTAINER (ASCII) ===================
         $n2 = "#$%^&*()-_=+{}[]\|;:'><,'";
         $goop_cont = $this->conn->create_container($n2);

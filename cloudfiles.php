@@ -1068,7 +1068,37 @@ class CF_Container
         $this->cdn_acl_referrer = "";
         return $this->cdn_uri;
     }
-
+    /**
+     * Purge Containers objects from CDN Cache.
+     * Example:
+     * <code>
+     * # ... authentication code excluded (see previous examples) ...
+     * #
+     * $conn = new CF_Authentication($auth);
+     * $container = $conn->get_container("cdn_enabled");
+     * $container->purge_from_cdn("user@domain.com");
+     * # or
+     * $container->purge_from_cdn();
+     * # or 
+     * $container->purge_from_cdn("user1@domain.com,user2@domain.com");
+     * @returns boolean True if successful
+     * @throws CDNNotEnabledException if CDN Is not enabled on this connection
+     * @throws InvalidResponseException if the response expected is not returned
+     */
+    function purge_from_cdn($email=null)
+    {
+        if (!$this->cfs_http->getCDNMUrl()) 
+        {
+            throw new CDNNotEnabledException(
+                "Authentication response did not indicate CDN availability");
+        }
+        $status = $this->cfs_http->purge_from_cdn($this->name, $email);
+        if ($status < 199 or $status > 299) {
+            throw new InvalidResponseException(
+                "Invalid response (".$status."): ".$this->cfs_http->get_error());
+        } 
+        return True;
+    }
     /**
      * Enable ACL restriction by User Agent for this container.
      *
@@ -2064,6 +2094,38 @@ class CF_Object
         $result = $this->stream($fp);
         fclose($fp);
         return $result;
+    }
+       /**
+     * Purge this Object from CDN Cache.
+     * Example:
+     * <code>
+     * # ... authentication code excluded (see previous examples) ...
+     * #
+     * $conn = new CF_Authentication($auth);
+     * $container = $conn->get_container("cdn_enabled");
+     * $obj = $container->get_object("object");
+     * $obj->purge_from_cdn("user@domain.com");
+     * # or
+     * $obj->purge_from_cdn();
+     * # or 
+     * $obj->purge_from_cdn("user1@domain.com,user2@domain.com");
+     * @returns boolean True if successful
+     * @throws CDNNotEnabledException if CDN Is not enabled on this connection
+     * @throws InvalidResponseException if the response expected is not returned
+     */
+    function purge_from_cdn($email=null)
+    {
+        if (!$this->container->cfs_http->getCDNMUrl())
+        {
+            throw new CDNNotEnabledException(
+                "Authentication response did not indicate CDN availability");
+        }
+        $status = $this->container->cfs_http->purge_from_cdn($this->container->name . "/" . $this->name, $email);
+        if ($status < 199 or $status > 299) {
+            throw new InvalidResponseException(
+                "Invalid response (".$status."): ".$this->container->cfs_http->get_error());
+        }
+        return True;
     }
 
     /**

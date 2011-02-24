@@ -29,7 +29,7 @@
  */
 require_once("cloudfiles_exceptions.php");
 
-define("PHP_CF_VERSION", "1.7.6");
+define("PHP_CF_VERSION", "1.7.7");
 define("USER_AGENT", sprintf("PHP-CloudFiles/%s", PHP_CF_VERSION));
 define("ACCOUNT_CONTAINER_COUNT", "X-Account-Container-Count");
 define("ACCOUNT_BYTES_USED", "X-Account-Bytes-Used");
@@ -50,7 +50,7 @@ define("AUTH_KEY_HEADER", "X-Auth-Key");
 define("AUTH_USER_HEADER_LEGACY", "X-Storage-User");
 define("AUTH_KEY_HEADER_LEGACY", "X-Storage-Pass");
 define("AUTH_TOKEN_LEGACY", "X-Storage-Token");
-
+define("CDN_EMAIL", "X-Purge-Email");
 /**
  * HTTP/cURL wrapper for Cloud Files
  *
@@ -262,8 +262,24 @@ class CF_Http
         return array($return_code,$this->error_str,array());
     }
 
-    # (CDN) POST /v1/Account/Container
+    # (CDN) DELETE /v1/Account/Container or /v1/Account/Container/Object
     #
+    function purge_from_cdn($path, $email=null)
+    {
+        if(!$path)
+            throw new SyntaxException("Path not set");
+        $url_path = $this->_make_path("CDN", NULL, $path);
+        if($email)
+        {
+            $hdrs = array(CDN_EMAIL => $email);
+            $return_code = $this->_send_request("DEL_POST",$url_path,$hdrs,"DELETE");
+        }
+        else
+            $return_code = $this->_send_request("DEL_POST",$url_path,null,"DELETE");
+        return $return_code;
+    }
+
+    # (CDN) POST /v1/Account/Container
     function update_cdn_container($container_name, $ttl=86400, $cdn_log_retention=False,
                                   $cdn_acl_user_agent="", $cdn_acl_referrer)
     {

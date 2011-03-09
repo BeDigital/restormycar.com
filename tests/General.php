@@ -431,6 +431,7 @@ class CloudFileAccountInfoTest extends PHPUnit_Framework_TestCase
             $this->assertNotNull($tcont->is_public());
             $this->assertNotNull($tcont->name == $name);
             $this->assertNotNull($tcont->cdn_uri == $cont->cdn_uri);
+            $this->assertNotNull($tcont->cdn_ssl_uri == $cont->cdn_ssl_uri);
             $this->assertNotNull($tcont->cdn_ttl == $cont->cdn_ttl);
         }
 
@@ -449,6 +450,7 @@ class CloudFileAccountInfoTest extends PHPUnit_Framework_TestCase
             $this->assertNotNull($tcont->is_public());
             $this->assertNotNull($tcont->name == $name);
             $this->assertNotNull($tcont->cdn_uri == $cont->cdn_uri);
+            $this->assertNotNull($tcont->cdn_ssl_uri == $cont->cdn_ssl_uri);
             $this->assertNotNull($tcont->cdn_ttl == $cont->cdn_ttl);
         }
 

@@ -29,7 +29,7 @@
  */
 require_once("cloudfiles_exceptions.php");
 
-define("PHP_CF_VERSION", "1.7.7");
+define("PHP_CF_VERSION", "1.7.8");
 define("USER_AGENT", sprintf("PHP-CloudFiles/%s", PHP_CF_VERSION));
 define("ACCOUNT_CONTAINER_COUNT", "X-Account-Container-Count");
 define("ACCOUNT_BYTES_USED", "X-Account-Bytes-Used");
@@ -37,6 +37,7 @@ define("CONTAINER_OBJ_COUNT", "X-Container-Object-Count");
 define("CONTAINER_BYTES_USED", "X-Container-Bytes-Used");
 define("METADATA_HEADER", "X-Object-Meta-");
 define("CDN_URI", "X-CDN-URI");
+define("CDN_SSL_URI", "X-CDN-SSL-URI");
 define("CDN_ENABLED", "X-CDN-Enabled");
 define("CDN_LOG_RETENTION", "X-Log-Retention");
 define("CDN_ACL_USER_AGENT", "X-User-Agent-ACL");
@@ -96,6 +97,7 @@ class CF_Http
     private $_obj_write_resource;
     private $_obj_write_string;
     private $_cdn_enabled;
+    private $_cdn_ssl_uri;
     private $_cdn_uri;
     private $_cdn_ttl;
     private $_cdn_log_retention;
@@ -146,6 +148,7 @@ class CF_Http
         $this->_obj_content_length = NULL;
         $this->_obj_metadata = array();
         $this->_cdn_enabled = NULL;
+        $this->_cdn_ssl_uri = NULL;
         $this->_cdn_uri = NULL;
         $this->_cdn_ttl = NULL;
         $this->_cdn_log_retention = NULL;
@@ -338,7 +341,8 @@ class CF_Http
             $this->error_str="Unexpected HTTP response: ".$this->response_reason;
             return array($return_code,$this->response_reason,False);
         }
-        return array($return_code,$this->response_reason,$this->_cdn_uri);
+        return array($return_code,$this->response_reason,$this->_cdn_uri,
+                     $this->_cdn_ssl_uri);
     }
 
     # (CDN) POST /v1/Account/Container
@@ -395,7 +399,8 @@ class CF_Http
         }
         if ($return_code == 204) {
             return array($return_code,$this->response_reason,
-                $this->_cdn_enabled, $this->_cdn_uri, $this->_cdn_ttl,
+                $this->_cdn_enabled, $this->_cdn_ssl_uri,
+                $this->_cdn_uri, $this->_cdn_ttl,
                 $this->_cdn_log_retention,
                 $this->_cdn_acl_user_agent,
                 $this->_cdn_acl_referrer
@@ -1011,6 +1016,10 @@ class CF_Http
             $this->_cdn_uri = trim(substr($header, strlen(CDN_URI)+1));
             return strlen($header);
         }
+        if (stripos($header, CDN_SSL_URI) === 0) {
+            $this->_cdn_ssl_uri = trim(substr($header, strlen(CDN_SSL_URI)+1));
+            return strlen($header);
+        }
         if (stripos($header, CDN_TTL) === 0) {
             $this->_cdn_ttl = trim(substr($header, strlen(CDN_TTL)+1))+0;
             return strlen($header);
@@ -1245,6 +1254,7 @@ class CF_Http
         $this->_obj_metadata = array();
         $this->_obj_write_string = "";
         $this->_cdn_enabled = NULL;
+        $this->_cdn_ssl_uri = NULL;
         $this->_cdn_uri = NULL;
         $this->_cdn_ttl = NULL;
         $this->response_status = 0;

@@ -24,14 +24,14 @@
     <td width="200" class="menu">
 	<div id="ric">
 					<p><a href="ric_AUTHORS.html">AUTHORS</a></p>
-					<p><a href="ric_COPYING.html">COPYING</a></p>
 					<p><a href="ric_README.html">README</a></p>
+					<p><a href="ric_COPYING.html">COPYING</a></p>
 					<p><a href="ric_Changelog.html">Changelog</a></p>
 			</div>
       <b>Packages:</b><br />
+              <a href="li_php-cloudfiles.html">php-cloudfiles</a><br />
               <a href="li_php-cloudfiles-exceptions.html">php-cloudfiles-exceptions</a><br />
               <a href="li_php-cloudfiles-http.html">php-cloudfiles-http</a><br />
-              <a href="li_php-cloudfiles.html">php-cloudfiles</a><br />
             <br /><br />
                 </td>
     <td>
@@ -131,6 +131,8 @@
 				<dd>in file cloudfiles.php, variable <a href="php-cloudfiles/CF_Container.html#var$cdn_enabled">CF_Container::$cdn_enabled</a></dd>
 							<dt><b>$cdn_log_retention</b></dt>
 				<dd>in file cloudfiles.php, variable <a href="php-cloudfiles/CF_Container.html#var$cdn_log_retention">CF_Container::$cdn_log_retention</a></dd>
+							<dt><b>$cdn_ssl_uri</b></dt>
+				<dd>in file cloudfiles.php, variable <a href="php-cloudfiles/CF_Container.html#var$cdn_ssl_uri">CF_Container::$cdn_ssl_uri</a></dd>
 							<dt><b>$cdn_ttl</b></dt>
 				<dd>in file cloudfiles.php, variable <a href="php-cloudfiles/CF_Container.html#var$cdn_ttl">CF_Container::$cdn_ttl</a></dd>
 							<dt><b>$cdn_uri</b></dt>
@@ -163,6 +165,8 @@
 				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#defineCDN_ENABLED">CDN_ENABLED</a></dd>
 							<dt><b>CDN_LOG_RETENTION</b></dt>
 				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#defineCDN_LOG_RETENTION">CDN_LOG_RETENTION</a></dd>
+							<dt><b>CDN_SSL_URI</b></dt>
+				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#defineCDN_SSL_URI">CDN_SSL_URI</a></dd>
 							<dt><b>CDN_TTL</b></dt>
 				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#defineCDN_TTL">CDN_TTL</a></dd>
 							<dt><b>CDN_URI</b></dt>
@@ -178,9 +182,9 @@
 							<dt><b>CF_Object</b></dt>
 				<dd>in file cloudfiles.php, class <a href="php-cloudfiles/CF_Object.html">CF_Object</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Object operations</dd>
 							<dt><b>close</b></dt>
-				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Connection.html#methodclose">CF_Connection::close()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Close a connection</dd>
-							<dt><b>close</b></dt>
 				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methodclose">CF_Http::close()</a></dd>
+							<dt><b>close</b></dt>
+				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Connection.html#methodclose">CF_Connection::close()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Close a connection</dd>
 							<dt><b>cloudfiles.php</b></dt>
 				<dd>procedural page <a href="php-cloudfiles/_cloudfiles.php.html">cloudfiles.php</a></dd>
 							<dt><b>cloudfiles_exceptions.php</b></dt>
@@ -397,6 +401,8 @@
 		<dl>
 							<dt><b>PHP_CF_VERSION</b></dt>
 				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#definePHP_CF_VERSION">PHP_CF_VERSION</a></dd>
+							<dt><b>public_ssl_uri</b></dt>
+				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Object.html#methodpublic_ssl_uri">CF_Object::public_ssl_uri()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;String representation of the Object's public SSL URI</dd>
 							<dt><b>public_uri</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Object.html#methodpublic_uri">CF_Object::public_uri()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;String representation of the Object's public URI</dd>
 							<dt><b>purge_from_cdn</b></dt>
@@ -522,7 +528,7 @@
 	<a href="elementindex.html#top">top</a><br>
         <div class="credit">
 		    <hr />
-		    Documentation generated on Thu, 24 Feb 2011 15:05:56 -0600 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+		    Documentation generated on Wed, 09 Mar 2011 13:07:29 +0000 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
 	      </div>
       </td></tr></table>
     </td>

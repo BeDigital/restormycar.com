@@ -27,8 +27,8 @@
     <td width="200" class="menu">
 	<div id="ric">
 					<p><a href="../ric_AUTHORS.html">AUTHORS</a></p>
-					<p><a href="../ric_COPYING.html">COPYING</a></p>
 					<p><a href="../ric_README.html">README</a></p>
+					<p><a href="../ric_COPYING.html">COPYING</a></p>
 					<p><a href="../ric_Changelog.html">Changelog</a></p>
 			</div>
       <b>Packages:</b><br />
@@ -81,6 +81,7 @@ Source Location: /cloudfiles.php<br /><br />
     <li><a href="../php-cloudfiles/CF_Container.html#var$cdn_acl_user_agent">$cdn_acl_user_agent</a></li>
     <li><a href="../php-cloudfiles/CF_Container.html#var$cdn_enabled">$cdn_enabled</a></li>
     <li><a href="../php-cloudfiles/CF_Container.html#var$cdn_log_retention">$cdn_log_retention</a></li>
+    <li><a href="../php-cloudfiles/CF_Container.html#var$cdn_ssl_uri">$cdn_ssl_uri</a></li>
     <li><a href="../php-cloudfiles/CF_Container.html#var$cdn_ttl">$cdn_ttl</a></li>
     <li><a href="../php-cloudfiles/CF_Container.html#var$cdn_uri">$cdn_uri</a></li>
     <li><a href="../php-cloudfiles/CF_Container.html#var$cfs_auth">$cfs_auth</a></li>
@@ -163,7 +164,7 @@ Container operations<br /><br /><p>Containers are storage compartments where you
 	<a name="var$cdn_acl_referrer"></a>
 	<p></p>
 	<h4>$cdn_acl_referrer = <span class="value"></span></h4>
-	<p>[line 930]</p>
+	<p>[line 931]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -187,7 +188,7 @@ Container operations<br /><br /><p>Containers are storage compartments where you
 	<a name="var$cdn_acl_user_agent"></a>
 	<p></p>
 	<h4>$cdn_acl_user_agent = <span class="value"></span></h4>
-	<p>[line 929]</p>
+	<p>[line 930]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -235,7 +236,31 @@ Container operations<br /><br /><p>Containers are storage compartments where you
 	<a name="var$cdn_log_retention"></a>
 	<p></p>
 	<h4>$cdn_log_retention = <span class="value"></span></h4>
-	<p>[line 928]</p>
+	<p>[line 929]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$cdn_ssl_uri"></a>
+	<p></p>
+	<h4>$cdn_ssl_uri = <span class="value"></span></h4>
+	<p>[line 926]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -259,7 +284,7 @@ Container operations<br /><br /><p>Containers are storage compartments where you
 	<a name="var$cdn_ttl"></a>
 	<p></p>
 	<h4>$cdn_ttl = <span class="value"></span></h4>
-	<p>[line 927]</p>
+	<p>[line 928]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -283,7 +308,7 @@ Container operations<br /><br /><p>Containers are storage compartments where you
 	<a name="var$cdn_uri"></a>
 	<p></p>
 	<h4>$cdn_uri = <span class="value"></span></h4>
-	<p>[line 926]</p>
+	<p>[line 927]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -409,7 +434,7 @@ Container operations<br /><br /><p>Containers are storage compartments where you
 
   <hr />
 	<a name="method__construct"></a>
-	<h3>constructor __construct <span class="smalllinenumber">[line 944]</span></h3>
+	<h3>constructor __construct <span class="smalllinenumber">[line 945]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -487,7 +512,7 @@ $cfs_http)</code>
   </div>
   <hr />
 	<a name="methodacl_referrer"></a>
-	<h3>method acl_referrer <span class="smalllinenumber">[line 1162]</span></h3>
+	<h3>method acl_referrer <span class="smalllinenumber">[line 1165]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -540,7 +565,7 @@ $cdn_acl_referrer = &quot;&quot;])</code>
   </div>
   <hr />
 	<a name="methodacl_user_agent"></a>
-	<h3>method acl_user_agent <span class="smalllinenumber">[line 1122]</span></h3>
+	<h3>method acl_user_agent <span class="smalllinenumber">[line 1125]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -593,7 +618,7 @@ $cdn_acl_user_agent = &quot;&quot;])</code>
   </div>
   <hr />
 	<a name="methodcreate_object"></a>
-	<h3>method create_object <span class="smalllinenumber">[line 1330]</span></h3>
+	<h3>method create_object <span class="smalllinenumber">[line 1334]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -639,7 +664,7 @@ $obj_name = NULL])</code>
   </div>
   <hr />
 	<a name="methodcreate_paths"></a>
-	<h3>method create_paths <span class="smalllinenumber">[line 1556]</span></h3>
+	<h3>method create_paths <span class="smalllinenumber">[line 1560]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -666,7 +691,7 @@ $path_name)</code>
   </div>
   <hr />
 	<a name="methoddelete_object"></a>
-	<h3>method delete_object <span class="smalllinenumber">[line 1516]</span></h3>
+	<h3>method delete_object <span class="smalllinenumber">[line 1520]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -720,7 +745,7 @@ $obj)</code>
   </div>
   <hr />
 	<a name="methodget_object"></a>
-	<h3>method get_object <span class="smalllinenumber">[line 1359]</span></h3>
+	<h3>method get_object <span class="smalllinenumber">[line 1363]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -767,7 +792,7 @@ $obj_name = NULL])</code>
   </div>
   <hr />
 	<a name="methodget_objects"></a>
-	<h3>method get_objects <span class="smalllinenumber">[line 1467]</span></h3>
+	<h3>method get_objects <span class="smalllinenumber">[line 1471]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -852,7 +877,7 @@ $path = NULL])</code>
   </div>
   <hr />
 	<a name="methodis_public"></a>
-	<h3>method is_public <span class="smalllinenumber">[line 1302]</span></h3>
+	<h3>method is_public <span class="smalllinenumber">[line 1306]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -886,7 +911,7 @@ $path = NULL])</code>
   </div>
   <hr />
 	<a name="methodlist_objects"></a>
-	<h3>method list_objects <span class="smalllinenumber">[line 1408]</span></h3>
+	<h3>method list_objects <span class="smalllinenumber">[line 1412]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -971,7 +996,7 @@ $path = NULL])</code>
   </div>
   <hr />
 	<a name="methodlog_retention"></a>
-	<h3>method log_retention <span class="smalllinenumber">[line 1208]</span></h3>
+	<h3>method log_retention <span class="smalllinenumber">[line 1211]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1024,7 +1049,7 @@ $cdn_log_retention = False])</code>
   </div>
   <hr />
 	<a name="methodmake_private"></a>
-	<h3>method make_private <span class="smalllinenumber">[line 1258]</span></h3>
+	<h3>method make_private <span class="smalllinenumber">[line 1261]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1068,7 +1093,7 @@ $cdn_log_retention = False])</code>
   </div>
   <hr />
 	<a name="methodmake_public"></a>
-	<h3>method make_public <span class="smalllinenumber">[line 1028]</span></h3>
+	<h3>method make_public <span class="smalllinenumber">[line 1030]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1122,7 +1147,7 @@ $ttl = 86400])</code>
   </div>
   <hr />
 	<a name="methodpurge_from_cdn"></a>
-	<h3>method purge_from_cdn <span class="smalllinenumber">[line 1088]</span></h3>
+	<h3>method purge_from_cdn <span class="smalllinenumber">[line 1091]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1164,7 +1189,7 @@ $email = null])</code>
   </div>
   <hr />
 	<a name="method__toString"></a>
-	<h3>method __toString <span class="smalllinenumber">[line 978]</span></h3>
+	<h3>method __toString <span class="smalllinenumber">[line 980]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1192,7 +1217,7 @@ $email = null])</code>
 
         <div class="credit">
 		    <hr />
-		    Documentation generated on Thu, 24 Feb 2011 15:05:57 -0600 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+		    Documentation generated on Wed, 09 Mar 2011 13:07:30 +0000 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
 	      </div>
       </td></tr></table>
     </td>

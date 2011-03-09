@@ -923,6 +923,7 @@ class CF_Container
     public $bytes_used;
 
     public $cdn_enabled;
+    public $cdn_ssl_uri;
     public $cdn_uri;
     public $cdn_ttl;
     public $cdn_log_retention;
@@ -959,6 +960,7 @@ class CF_Container
         $this->bytes_used = $bytes;
         $this->cdn_enabled = NULL;
         $this->cdn_uri = NULL;
+        $this->cdn_ssl_uri = NULL;
         $this->cdn_ttl = NULL;
         $this->cdn_log_retention = NULL;
         $this->cdn_acl_user_agent = NULL;
@@ -1044,13 +1046,13 @@ class CF_Container
             if ($status == 404) {
                 # this instance _thinks_ the container was published, but the
                 # cdn management system thinks otherwise - try again with a PUT
-                list($status, $reason, $cdn_uri) =
+                list($status, $reason, $cdn_uri, $cdn_ssl_uri) =
                     $this->cfs_http->add_cdn_container($this->name,$ttl);
 
             }
         } else {
             # publish it for first time
-            list($status, $reason, $cdn_uri) =
+            list($status, $reason, $cdn_uri, $cdn_ssl_uri) =
                 $this->cfs_http->add_cdn_container($this->name,$ttl);
         }
         #if ($status == 401 && $this->_re_auth()) {
@@ -1062,6 +1064,7 @@ class CF_Container
         }
         $this->cdn_enabled = True;
         $this->cdn_ttl = $ttl;
+        $this->cdn_ssl_uri = $cdn_ssl_uri;
         $this->cdn_uri = $cdn_uri;
         $this->cdn_log_retention = False;
         $this->cdn_acl_user_agent = "";
@@ -1272,6 +1275,7 @@ class CF_Container
         $this->cdn_enabled = False;
         $this->cdn_ttl = NULL;
         $this->cdn_uri = NULL;
+        $this->cdn_ssl_uri = NULL;
         $this->cdn_log_retention = NULL;
         $this->cdn_acl_user_agent = NULL;
         $this->cdn_acl_referrer = NULL;
@@ -1579,7 +1583,7 @@ class CF_Container
      */
     private function _cdn_initialize()
     {
-        list($status, $reason, $cdn_enabled, $cdn_uri, $cdn_ttl,
+        list($status, $reason, $cdn_enabled, $cdn_ssl_uri, $cdn_uri, $cdn_ttl,
              $cdn_log_retention, $cdn_acl_user_agent, $cdn_acl_referrer) =
             $this->cfs_http->head_cdn_container($this->name);
         #if ($status == 401 && $this->_re_auth()) {
@@ -1590,6 +1594,7 @@ class CF_Container
                 "Invalid response (".$status."): ".$this->cfs_http->get_error());
         }
         $this->cdn_enabled = $cdn_enabled;
+        $this->cdn_ssl_uri = $cdn_ssl_uri;
         $this->cdn_uri = $cdn_uri;
         $this->cdn_ttl = $cdn_ttl;
         $this->cdn_log_retention = $cdn_log_retention;
@@ -1764,6 +1769,32 @@ class CF_Object
     {
         if ($this->container->cdn_enabled) {
             return $this->container->cdn_uri . "/" . $this->name;
+        }
+        return NULL;
+    }
+
+       /**
+     * String representation of the Object's public SSL URI
+     *
+     * A string representing the Object's public SSL URI assuming that it's
+     * parent Container is CDN-enabled.
+     *
+     * Example:
+     * <code>
+     * # ... authentication/connection/container code excluded
+     * # ... see previous examples
+     *
+     * # Print out the Object's CDN SSL URI (if it has one) in an HTML img-tag
+     * #
+     * print "<img src='$pic->public_ssl_uri()' />\n";
+     * </code>
+     *
+     * @return string Object's public SSL URI or NULL
+     */
+    function public_ssl_uri()
+    {
+        if ($this->container->cdn_enabled) {
+            return $this->container->cdn_ssl_uri . "/" . $this->name;
         }
         return NULL;
     }

@@ -313,7 +313,7 @@ class CF_Http
             $this->error_str="Unexpected HTTP response: ".$this->response_reason;
             return array($return_code, $this->error_str, NULL);
         }
-        return array($return_code, "Accepted", $this->_cdn_uri);
+        return array($return_code, "Accepted", $this->_cdn_uri, $this->_cdn_ssl_uri);
 
     }
 

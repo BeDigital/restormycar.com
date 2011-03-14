@@ -1035,7 +1035,7 @@ class CF_Container
         }
         if ($this->cdn_uri != NULL) {
             # previously published, assume we're setting new attributes
-            list($status, $reason, $cdn_uri) =
+            list($status, $reason, $cdn_uri, $cdn_ssl_uri) =
                 $this->cfs_http->update_cdn_container($this->name,$ttl,
                                                       $this->cdn_log_retention,
                                                       $this->cdn_acl_user_agent,

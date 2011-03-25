@@ -23,15 +23,15 @@
   <tr valign="top">
     <td width="200" class="menu">
 	<div id="ric">
-					<p><a href="ric_AUTHORS.html">AUTHORS</a></p>
 					<p><a href="ric_README.html">README</a></p>
-					<p><a href="ric_COPYING.html">COPYING</a></p>
 					<p><a href="ric_Changelog.html">Changelog</a></p>
+					<p><a href="ric_AUTHORS.html">AUTHORS</a></p>
+					<p><a href="ric_COPYING.html">COPYING</a></p>
 			</div>
       <b>Packages:</b><br />
+              <a href="li_php-cloudfiles-http.html">php-cloudfiles-http</a><br />
               <a href="li_php-cloudfiles.html">php-cloudfiles</a><br />
               <a href="li_php-cloudfiles-exceptions.html">php-cloudfiles-exceptions</a><br />
-              <a href="li_php-cloudfiles-http.html">php-cloudfiles-http</a><br />
             <br /><br />
                 </td>
     <td>
@@ -345,12 +345,16 @@
 	<div>
 		<h2>m</h2>
 		<dl>
+							<dt><b>$manifest</b></dt>
+				<dd>in file cloudfiles.php, variable <a href="php-cloudfiles/CF_Object.html#var$manifest">CF_Object::$manifest</a></dd>
 							<dt><b>$metadata</b></dt>
 				<dd>in file cloudfiles.php, variable <a href="php-cloudfiles/CF_Object.html#var$metadata">CF_Object::$metadata</a></dd>
 							<dt><b>make_private</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Container.html#methodmake_private">CF_Container::make_private()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Disable the CDN sharing for this container</dd>
 							<dt><b>make_public</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Container.html#methodmake_public">CF_Container::make_public()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Enable Container content to be served via CDN or modify CDN attributes</dd>
+							<dt><b>MANIFEST_HEADER</b></dt>
+				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#defineMANIFEST_HEADER">MANIFEST_HEADER</a></dd>
 							<dt><b>MAX_CONTAINER_NAME_LEN</b></dt>
 				<dd>in file cloudfiles.php, constant <a href="php-cloudfiles/_cloudfiles.php.html#defineMAX_CONTAINER_NAME_LEN">MAX_CONTAINER_NAME_LEN</a></dd>
 							<dt><b>MAX_OBJECT_NAME_LEN</b></dt>
@@ -440,11 +444,11 @@
 							<dt><b>setCFAuth</b></dt>
 				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methodsetCFAuth">CF_Http::setCFAuth()</a></dd>
 							<dt><b>setDebug</b></dt>
-				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methodsetDebug">CF_Http::setDebug()</a></dd>
-							<dt><b>setDebug</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Connection.html#methodsetDebug">CF_Connection::setDebug()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Toggle debugging of instance and back-end HTTP module</dd>
 							<dt><b>setDebug</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Authentication.html#methodsetDebug">CF_Authentication::setDebug()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Toggle debugging - set cURL verbose flag</dd>
+							<dt><b>setDebug</b></dt>
+				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methodsetDebug">CF_Http::setDebug()</a></dd>
 							<dt><b>setReadProgressFunc</b></dt>
 				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methodsetReadProgressFunc">CF_Http::setReadProgressFunc()</a></dd>
 							<dt><b>setWriteProgressFunc</b></dt>
@@ -456,15 +460,17 @@
 							<dt><b>set_write_progress_function</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Connection.html#methodset_write_progress_function">CF_Connection::set_write_progress_function()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set a user-supplied callback function to report upload progress</dd>
 							<dt><b>ssl_use_cabundle</b></dt>
-				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methodssl_use_cabundle">CF_Http::ssl_use_cabundle()</a></dd>
+				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Connection.html#methodssl_use_cabundle">CF_Connection::ssl_use_cabundle()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Use the Certificate Authority bundle included with this API</dd>
 							<dt><b>ssl_use_cabundle</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Authentication.html#methodssl_use_cabundle">CF_Authentication::ssl_use_cabundle()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Use the Certificate Authority bundle included with this API</dd>
 							<dt><b>ssl_use_cabundle</b></dt>
-				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Connection.html#methodssl_use_cabundle">CF_Connection::ssl_use_cabundle()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Use the Certificate Authority bundle included with this API</dd>
+				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methodssl_use_cabundle">CF_Http::ssl_use_cabundle()</a></dd>
 							<dt><b>STORAGE_URL</b></dt>
 				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#defineSTORAGE_URL">STORAGE_URL</a></dd>
 							<dt><b>stream</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Object.html#methodstream">CF_Object::stream()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Streaming read of Object's data</dd>
+							<dt><b>sync_manifest</b></dt>
+				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Object.html#methodsync_manifest">CF_Object::sync_manifest()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Store new Object manifest</dd>
 							<dt><b>sync_metadata</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Object.html#methodsync_metadata">CF_Object::sync_metadata()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Store new Object metadata</dd>
 							<dt><b>SyntaxException</b></dt>
@@ -528,7 +534,7 @@
 	<a href="elementindex.html#top">top</a><br>
         <div class="credit">
 		    <hr />
-		    Documentation generated on Wed, 09 Mar 2011 13:07:29 +0000 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+		    Documentation generated on Fri, 25 Mar 2011 04:09:59 -0500 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
 	      </div>
       </td></tr></table>
     </td>

@@ -29,13 +29,14 @@
  */
 require_once("cloudfiles_exceptions.php");
 
-define("PHP_CF_VERSION", "1.7.8");
+define("PHP_CF_VERSION", "1.7.9");
 define("USER_AGENT", sprintf("PHP-CloudFiles/%s", PHP_CF_VERSION));
 define("ACCOUNT_CONTAINER_COUNT", "X-Account-Container-Count");
 define("ACCOUNT_BYTES_USED", "X-Account-Bytes-Used");
 define("CONTAINER_OBJ_COUNT", "X-Container-Object-Count");
 define("CONTAINER_BYTES_USED", "X-Container-Bytes-Used");
 define("METADATA_HEADER", "X-Object-Meta-");
+define("MANIFEST_HEADER", "X-Object-Manifest");
 define("CDN_URI", "X-CDN-URI");
 define("CDN_SSL_URI", "X-CDN-SSL-URI");
 define("CDN_ENABLED", "X-CDN-Enabled");
@@ -94,6 +95,7 @@ class CF_Http
     private $_obj_content_type;
     private $_obj_content_length;
     private $_obj_metadata;
+    private $_obj_manifest;
     private $_obj_write_resource;
     private $_obj_write_string;
     private $_cdn_enabled;
@@ -147,6 +149,7 @@ class CF_Http
         $this->_obj_content_type = NULL;
         $this->_obj_content_length = NULL;
         $this->_obj_metadata = array();
+        $this->_obj_manifest = NULL;
         $this->_cdn_enabled = NULL;
         $this->_cdn_ssl_uri = NULL;
         $this->_cdn_uri = NULL;
@@ -848,7 +851,8 @@ class CF_Http
                 "Method argument is not a valid CF_Object.");
         }
 
-        if (!is_array($obj->metadata) || empty($obj->metadata)) {
+        if (!is_array($obj->metadata) && !$obj->manifest) {
+
             $this->error_str = "Metadata array is empty.";
             return 0;
         }
@@ -900,7 +904,8 @@ class CF_Http
                 $this->_obj_last_modified,
                 $this->_obj_content_type,
                 $this->_obj_content_length,
-                $this->_obj_metadata);
+                $this->_obj_metadata,
+                $this->_obj_manifest);
         }
         $this->error_str = "Unexpected HTTP return code: $return_code";
         return array($return_code, $this->error_str." ".$this->response_reason,
@@ -1022,6 +1027,10 @@ class CF_Http
         }
         if (stripos($header, CDN_TTL) === 0) {
             $this->_cdn_ttl = trim(substr($header, strlen(CDN_TTL)+1))+0;
+            return strlen($header);
+        }
+        if (stripos($header, MANIFEST_HEADER) === 0) {
+            $this->_obj_manifest = trim(substr($header, strlen(MANIFEST_HEADER)+1));
             return strlen($header);
         }
         if (stripos($header, CDN_LOG_RETENTION) === 0) {
@@ -1252,6 +1261,7 @@ class CF_Http
         $this->_obj_content_type = NULL;
         $this->_obj_content_length = NULL;
         $this->_obj_metadata = array();
+        $this->_obj_manifest = NULL;
         $this->_obj_write_string = "";
         $this->_cdn_enabled = NULL;
         $this->_cdn_ssl_uri = NULL;
@@ -1287,6 +1297,8 @@ class CF_Http
     private function _metadata_headers(&$obj)
     {
         $hdrs = array();
+        if ($obj->manifest)
+            $hdrs[MANIFEST_HEADER] = $obj->manifest;
         foreach ($obj->metadata as $k => $v) {
             if (strpos($k,":") !== False) {
                 throw new SyntaxException(

@@ -1634,6 +1634,7 @@ class CF_Object
     public $content_type;
     public $content_length;
     public $metadata;
+    public $manifest;
     private $etag;
 
     /**
@@ -1662,6 +1663,7 @@ class CF_Object
         $this->content_type = NULL;
         $this->content_length = 0;
         $this->metadata = array();
+        $this->manifest = NULL;
         if ($dohead) {
             if (!$this->_initialize() && $force_exists) {
                 throw new NoSuchObjectException("No such object '".$name."'");
@@ -1931,7 +1933,7 @@ class CF_Object
      */
     function sync_metadata()
     {
-        if (!empty($this->metadata)) {
+        if (!empty($this->metadata) || $this->manifest) {
             $status = $this->container->cfs_http->update_object($this);
             #if ($status == 401 && $this->_re_auth()) {
             #    return $this->sync_metadata();
@@ -1944,7 +1946,37 @@ class CF_Object
         }
         return False;
     }
+    /**
+     * Store new Object manifest
+     *
+     * Write's an Object's manifest to the remote Object.  This will overwrite
+     * an prior Object manifest.
+     *
+     * Example:
+     * <code>
+     * # ... authentication/connection/container code excluded
+     * # ... see previous examples
+     *
+     * $my_docs = $conn->get_container("documents");
+     * $doc = $my_docs->get_object("README");
+     *
+     * # Define new manifest for the object
+     * #
+     * $doc->manifest = "container/prefix";
+     *
+     * # Push the new manifest up to the storage system
+     * #
+     * $doc->sync_manifest();
+     * </code>
+     *
+     * @return boolean <kbd>True</kbd> if successful, <kbd>False</kbd> otherwise
+     * @throws InvalidResponseException unexpected response
+     */
 
+    function sync_manifest()
+    {
+        return $this->sync_metadata();
+    }
     /**
      * Upload Object's data to Cloud Files
      *
@@ -1977,7 +2009,7 @@ class CF_Object
      */
     function write($data=NULL, $bytes=0, $verify=True)
     {
-        if (!$data) {
+        if (!$data && !is_string($data)) {
             throw new SyntaxException("Missing data source.");
         }
         if ($bytes > MAX_OBJECT_SIZE) {
@@ -2225,7 +2257,7 @@ class CF_Object
     private function _initialize()
     {
         list($status, $reason, $etag, $last_modified, $content_type,
-            $content_length, $metadata) =
+            $content_length, $metadata, $manifest) =
                 $this->container->cfs_http->head_object($this);
         #if ($status == 401 && $this->_re_auth()) {
         #    return $this->_initialize();
@@ -2242,6 +2274,7 @@ class CF_Object
         $this->content_type = $content_type;
         $this->content_length = $content_length;
         $this->metadata = $metadata;
+        $this->manifest = $manifest;
         return True;
     }
 

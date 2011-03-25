@@ -152,12 +152,14 @@ class CloudFileAccountInfoTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($cont_name_check);
     }
     
-    public function testCreateEmptyObject ()
+    public function testManifestObject ()
     { 
-        $this->setExpectedException('SyntaxException');
-        
-        $o0 = $this->container->create_object("empty_object");
+        $o0 = $this->container->create_object("manifest");
+        $o0->manifest = $this->container->name . "/manifest";
         $result = $o0->write();
+        $this->assertNotNull($result);
+        $o0 = $this->container->get_object("manifest");
+        $this->assertTrue($o0->manifest == $this->container->name . "/manifest");
     }
 
     public function testObjectWithSlash ()

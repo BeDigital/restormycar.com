@@ -892,12 +892,12 @@ class CF_Http
         if (!$return_code) {
             $this->error_str .= ": Failed to obtain valid HTTP response.";
             return array(0, $this->error_str." ".$this->response_reason,
-                NULL, NULL, NULL, NULL, array());
+                NULL, NULL, NULL, NULL, array(), NULL);
         }
 
         if ($return_code == 404) {
             return array($return_code, $this->response_reason,
-                NULL, NULL, NULL, NULL, array());
+                NULL, NULL, NULL, NULL, array(), NULL);
         }
         if ($return_code == 204 || $return_code == 200) {
             return array($return_code,$this->response_reason,
@@ -910,7 +910,7 @@ class CF_Http
         }
         $this->error_str = "Unexpected HTTP return code: $return_code";
         return array($return_code, $this->error_str." ".$this->response_reason,
-                NULL, NULL, NULL, NULL, array());
+                NULL, NULL, NULL, NULL, array(), NULL);
     }
 
     # DELETE /v1/Account/Container/Object

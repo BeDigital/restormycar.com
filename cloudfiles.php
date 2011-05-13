@@ -208,7 +208,7 @@ class CF_Authentication
         if ($status == 401) {
             throw new AuthenticationException("Invalid username or access key.");
         }
-        if ($status != 204) {
+        if ($status < 200 || $status > 299) {
             throw new InvalidResponseException(
                 "Unexpected response (".$status."): ".$reason);
         }

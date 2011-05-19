@@ -208,7 +208,7 @@ class CF_Authentication
         if ($status == 401) {
             throw new AuthenticationException("Invalid username or access key.");
         }
-        if ($status != 204) {
+        if ($status < 200 || $status > 299) {
             throw new InvalidResponseException(
                 "Unexpected response (".$status."): ".$reason);
         }
@@ -1792,7 +1792,7 @@ class CF_Container
      *
      * Given an Object whos name contains '/' path separators, this function
      * will create the "directory marker" Objects of one byte with the
-     * Content-Type of "application/folder".
+     * Content-Type of "application/directory".
      *
      * It assumes the last element of the full path is the "real" Object
      * and does NOT create a remote storage Object for that last element.

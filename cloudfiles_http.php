@@ -395,13 +395,13 @@ class CF_Http
 
         if (!$return_code) {
             $this->error_str .= ": Failed to obtain valid HTTP response.";
-            return array(0,$this->error_str,NULL,NULL,NULL,NULL,NULL,NULL);
+            return array(0,$this->error_str,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
         }
         if ($return_code == 401) {
-            return array($return_code,"Unauthorized",NULL,NULL,NULL,NULL,NULL,NULL);
+            return array($return_code,"Unauthorized",NULL,NULL,NULL,NULL,NULL,NULL,NULL);
         }
         if ($return_code == 404) {
-            return array($return_code,"Account not found.",NULL,NULL,NULL,NULL,NULL,NULL);
+            return array($return_code,"Account not found.",NULL,NULL,NULL,NULL,NULL,NULL,NULL);
         }
         if ($return_code == 204) {
             return array($return_code,$this->response_reason,
@@ -416,7 +416,8 @@ class CF_Http
                      NULL,NULL,NULL,
                      $this->_cdn_log_retention,
                      $this->_cdn_acl_user_agent,
-                     $this->_cdn_acl_referrer
+                     $this->_cdn_acl_referrer,
+                     NULL
             );
     }
 
@@ -894,12 +895,12 @@ class CF_Http
         if (!$return_code) {
             $this->error_str .= ": Failed to obtain valid HTTP response.";
             return array(0, $this->error_str." ".$this->response_reason,
-                NULL, NULL, NULL, NULL, array());
+                NULL, NULL, NULL, NULL, array(), NULL);
         }
 
         if ($return_code == 404) {
             return array($return_code, $this->response_reason,
-                NULL, NULL, NULL, NULL, array());
+                NULL, NULL, NULL, NULL, array(), NULL);
         }
         if ($return_code == 204 || $return_code == 200) {
             return array($return_code,$this->response_reason,
@@ -912,7 +913,7 @@ class CF_Http
         }
         $this->error_str = "Unexpected HTTP return code: $return_code";
         return array($return_code, $this->error_str." ".$this->response_reason,
-                NULL, NULL, NULL, NULL, array());
+                NULL, NULL, NULL, NULL, array(), NULL);
     }
 
     # COPY /v1/Account/Container/Object

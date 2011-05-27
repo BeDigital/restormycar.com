@@ -1513,13 +1513,14 @@ class CF_Container
      *
      * @param obj $obj name or instance of Object to copy
      * @param obj $container_target name or instance of target Container
-     * @param array $metadata metadata array for new object (optional)
-     * @return boolean <kbd>true</kbd> if successfully copied
+		 * @param string $dest_obj_name name of target object (optional - uses source name if omitted)
+		 * @param array $metadata metadata array for new object (optional)
+		 * @return boolean <kbd>true</kbd> if successfully copied
      * @throws SyntaxException invalid Object/Container name
      * @throws NoSuchObjectException remote Object does not exist
      * @throws InvalidResponseException unexpected response
      */
-    function copy_object_to($obj,$container_target,$metadata=NULL)
+    function copy_object_to($obj,$container_target,$dest_obj_name=NULL,$metadata=NULL)
     {
         $obj_name = NULL;
         if (is_object($obj)) {
@@ -1534,6 +1535,10 @@ class CF_Container
             throw new SyntaxException("Object name not set.");
         }
 
+				if ($dest_obj_name === NULL) {
+            $dest_obj_name = $obj_name;
+				}
+
         $container_name_target = NULL;
         if (is_object($container_target)) {
             if (get_class($container_target) == "CF_Container") {
@@ -1547,10 +1552,7 @@ class CF_Container
             throw new SyntaxException("Container name target not set.");
         }
 
-        $status = $this->cfs_http->copy_object($obj_name,$this->name,$container_name_target,$metadata);
-		#if ($status == 401 && $this->_re_auth()) {
-		#    return $this->copy_object_to($obj,$container_target);
-		#}
+        $status = $this->cfs_http->copy_object($obj_name,$dest_obj_name,$this->name,$container_name_target,$metadata);
         if ($status == 404) {
             $m = "Specified object '".$this->name."/".$obj_name;
             $m.= "' did not exist as source to copy from or '".$container_name_target."' did not exist as target to copy to.";
@@ -1583,14 +1585,15 @@ class CF_Container
      * </code>
      *
      * @param obj $obj name or instance of Object to copy
-     * @param obj $container_target name or instance of source Container
-     * @param array $metadata metadata array for new object (optional)
+     * @param obj $container_source name or instance of source Container
+		 * @param string $dest_obj_name name of target object (optional - uses source name if omitted)
+		 * @param array $metadata metadata array for new object (optional)
      * @return boolean <kbd>true</kbd> if successfully copied
      * @throws SyntaxException invalid Object/Container name
      * @throws NoSuchObjectException remote Object does not exist
      * @throws InvalidResponseException unexpected response
      */
-    function copy_object_from($obj,$container_source,$metadata=NULL)
+    function copy_object_from($obj,$container_source,$dest_obj_name=NULL,$metadata=NULL)
     {
         $obj_name = NULL;
         if (is_object($obj)) {
@@ -1605,6 +1608,10 @@ class CF_Container
             throw new SyntaxException("Object name not set.");
         }
 
+				if ($dest_obj_name === NULL) {
+            $dest_obj_name = $obj_name;
+				}
+
         $container_name_source = NULL;
         if (is_object($container_source)) {
             if (get_class($container_source) == "CF_Container") {
@@ -1618,10 +1625,7 @@ class CF_Container
             throw new SyntaxException("Container name source not set.");
         }
 
-        $status = $this->cfs_http->copy_object($obj_name,$container_name_source,$this->name,$metadata);
-		#if ($status == 401 && $this->_re_auth()) {
-		#    return $this->copy_object_from($obj,$container_source);
-		#}
+        $status = $this->cfs_http->copy_object($obj_name,$dest_obj_name,$container_name_source,$this->name,$metadata);
         if ($status == 404) {
             $m = "Specified object '".$container_name_source."/".$obj_name;
             $m.= "' did not exist as source to copy from or '".$this->name."/".$obj_name."' did not exist as target to copy to.";
@@ -1656,17 +1660,18 @@ class CF_Container
      *
      * @param obj $obj name or instance of Object to move
      * @param obj $container_target name or instance of target Container
-     * @param array $metadata metadata array for new object (optional)
+		 * @param string $dest_obj_name name of target object (optional - uses source name if omitted)
+		 * @param array $metadata metadata array for new object (optional)
      * @return boolean <kbd>true</kbd> if successfully moved
      * @throws SyntaxException invalid Object/Container name
      * @throws NoSuchObjectException remote Object does not exist
      * @throws InvalidResponseException unexpected response
      */
-    function move_object_to($obj,$container_target,$metadata=NULL)
+    function move_object_to($obj,$container_target,$dest_obj_name=NULL,$metadata=NULL)
     {
     	$retVal = false;
 
-        if(self::copy_object_to($obj,$container_target,$metadata)) {
+        if(self::copy_object_to($obj,$container_target,$dest_obj_name,$metadata)) {
         	$retVal = self::delete_object($obj,$this->name);
         }
 
@@ -1693,18 +1698,19 @@ class CF_Container
      * </code>
      *
      * @param obj $obj name or instance of Object to move
-     * @param obj $container_target name or instance of target Container
-     * @param array $metadata metadata array for new object (optional)
+     * @param obj $container_source name or instance of target Container
+		 * @param string $dest_obj_name name of target object (optional - uses source name if omitted)
+		 * @param array $metadata metadata array for new object (optional)
      * @return boolean <kbd>true</kbd> if successfully moved
      * @throws SyntaxException invalid Object/Container name
      * @throws NoSuchObjectException remote Object does not exist
      * @throws InvalidResponseException unexpected response
      */
-    function move_object_from($obj,$container_source,$metadata=NULL)
+    function move_object_from($obj,$container_source,$dest_obj_name=NULL,$metadata=NULL)
     {
     	$retVal = false;
 
-        if(self::copy_object_from($obj,$container_source,$metadata)) {
+        if(self::copy_object_from($obj,$container_source,$dest_obj_name,$metadata)) {
         	$retVal = self::delete_object($obj,$container_source);
         } 	
 

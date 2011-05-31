@@ -918,9 +918,9 @@ class CF_Http
 
     # COPY /v1/Account/Container/Object
     #
-    function copy_object($object_name, $container_name_source, $container_name_target, $metadata=NULL)
+    function copy_object($src_obj_name, $dest_obj_name, $container_name_source, $container_name_target, $metadata=NULL)
     {
-        if (!$object_name) {
+        if (!$src_obj_name) {
             $this->error_str = "Object name not set.";
             return 0;
         }
@@ -947,8 +947,8 @@ class CF_Http
 
     	$conn_type = "COPY";
 
-        $url_path = $this->_make_path("STORAGE", $container_name_source, $object_name);
-        $destination = $container_name_target."/".$object_name;
+        $url_path = $this->_make_path("STORAGE", $container_name_source, $src_obj_name);
+        $destination = $container_name_target."/".$dest_obj_name;
 
         $hdrs = array(DESTINATION => $destination);
 

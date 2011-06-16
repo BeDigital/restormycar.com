@@ -53,6 +53,8 @@ define("AUTH_USER_HEADER_LEGACY", "X-Storage-User");
 define("AUTH_KEY_HEADER_LEGACY", "X-Storage-Pass");
 define("AUTH_TOKEN_LEGACY", "X-Storage-Token");
 define("CDN_EMAIL", "X-Purge-Email");
+define("DESTINATION", "Destination");
+
 /**
  * HTTP/cURL wrapper for Cloud Files
  *
@@ -131,6 +133,7 @@ class CF_Http
             "HEAD"      => NULL, # HEAD requests
             "PUT_CONT"  => NULL, # PUT container
             "DEL_POST"  => NULL, # DELETE containers/objects, POST objects
+            "COPY"      => null, # COPY objects
         );
 
         $this->_user_read_progress_callback_func = NULL;
@@ -913,6 +916,60 @@ class CF_Http
                 NULL, NULL, NULL, NULL, array(), NULL);
     }
 
+    # COPY /v1/Account/Container/Object
+    #
+    function copy_object($src_obj_name, $dest_obj_name, $container_name_source, $container_name_target, $metadata=NULL)
+    {
+        if (!$src_obj_name) {
+            $this->error_str = "Object name not set.";
+            return 0;
+        }
+
+        if ($container_name_source == "") {
+            $this->error_str = "Container name source not set.";
+            return 0;
+        }
+
+        if ($container_name_source != "0" and !isset($container_name_source)) {
+            $this->error_str = "Container name source not set.";
+            return 0;
+        }
+
+        if ($container_name_target == "") {
+            $this->error_str = "Container name target not set.";
+            return 0;
+        }
+
+        if ($container_name_target != "0" and !isset($container_name_target)) {
+            $this->error_str = "Container name target not set.";
+            return 0;
+        }
+
+    	$conn_type = "COPY";
+
+        $url_path = $this->_make_path("STORAGE", $container_name_source, $src_obj_name);
+        $destination = $container_name_target."/".$dest_obj_name;
+
+        $hdrs = array(DESTINATION => $destination);
+
+        if($metadata)
+			self::_process_metadata($hdrs,$metadata);
+		
+        $return_code = $this->_send_request($conn_type,$url_path,$hdrs,"COPY");
+        if (!$return_code) {
+            $this->error_str .= ": Failed to obtain valid HTTP response.";
+            return 0;
+        }
+        if ($return_code == 404) {
+            $this->error_str = "Specified container/object did not exist.";
+        }
+        if ($return_code != 201) {
+            $this->error_str = "Unexpected HTTP return code: $return_code.";
+        }
+
+        return $return_code;
+    }
+
     # DELETE /v1/Account/Container/Object
     #
     function delete_object($container_name, $object_name)
@@ -1245,6 +1302,9 @@ class CF_Http
         if ($conn_type == "DEL_POST") {
         	curl_setopt($ch, CURLOPT_NOBODY, 1);
 	}
+        if ($conn_type == "COPY") {
+            curl_setopt($ch, CURLOPT_NOBODY, 1);
+        }
         $this->connections[$conn_type] = $ch;
         return;
     }
@@ -1300,25 +1360,37 @@ class CF_Http
         $hdrs = array();
         if ($obj->manifest)
             $hdrs[MANIFEST_HEADER] = $obj->manifest;
-        foreach ($obj->metadata as $k => $v) {
-            if (strpos($k,":") !== False) {
-                throw new SyntaxException(
-                    "Metadata keys cannot contain a ':' character.");
-            }
-            $k = trim($k);
-            $key = sprintf("%s%s", METADATA_HEADER, $k);
-            if (!array_key_exists($key, $hdrs)) {
-                if (strlen($k) > 128 || strlen($v) > 256) {
-                    $this->error_str = "Metadata key or value exceeds ";
-                    $this->error_str .= "maximum length: ($k: $v)";
-                    return 0;
-                }
-                $hdrs[] = sprintf("%s%s: %s", METADATA_HEADER, $k, trim($v));
-            }
-        }
+
+        self::_process_metadata($hdrs,$obj->metadata);
+
         return $hdrs;
     }
 
+    private function _process_metadata(&$hdrs,$metadata)
+    {
+    	if(is_array($metadata))
+    	{
+	        foreach ($metadata as $k => $v) {
+	            if (strpos($k,":") !== False) {
+	                throw new SyntaxException(
+	                    "Metadata keys cannot contain a ':' character.");
+	            }
+	            $k = trim($k);
+	            $key = sprintf("%s%s", METADATA_HEADER, $k);
+	            if (!array_key_exists($key, $hdrs)) {
+	                if (strlen($k) > 128 || strlen($v) > 256) {
+	                    $this->error_str = "Metadata key or value exceeds ";
+	                    $this->error_str .= "maximum length: ($k: $v)";
+	                    return 0;
+	                }
+	                $hdrs[] = sprintf("%s%s: %s", METADATA_HEADER, $k, trim($v));
+	            }
+	        }
+    	}
+
+        return $hdrs;
+    }
+    
     private function _send_request($conn_type, $url_path, $hdrs=NULL, $method="GET", $force_new=False)
     {
         $this->_init($conn_type, $force_new);
@@ -1331,6 +1403,10 @@ class CF_Http
                 );
         
         switch ($method) {
+        case "COPY":
+            curl_setopt($this->connections[$conn_type],
+                CURLOPT_CUSTOMREQUEST, "COPY");
+            break;
         case "DELETE":
             curl_setopt($this->connections[$conn_type],
                 CURLOPT_CUSTOMREQUEST, "DELETE");

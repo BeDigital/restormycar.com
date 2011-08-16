@@ -960,8 +960,9 @@ class CF_Http
         $hdrs = array(DESTINATION => $destination);
 
         if($metadata)
-			self::_process_metadata($hdrs,$metadata);
-		
+            $hdrs = array_merge($hdrs,
+                self::_process_metadata($hdrs, $metadata));
+
         $return_code = $this->_send_request($conn_type,$url_path,$hdrs,"COPY");
         switch ($return_code) {
         case 201:
@@ -1373,12 +1374,10 @@ class CF_Http
         if ($obj->manifest)
             $hdrs[MANIFEST_HEADER] = $obj->manifest;
 
-        self::_process_metadata($hdrs,$obj->metadata);
-
-        return $hdrs;
+        return self::_process_metadata($hdrs,$obj->metadata);
     }
 
-    private function _process_metadata(&$hdrs,$metadata)
+    private function _process_metadata($hdrs,$metadata)
     {
         if(!is_array($metadata)) return $hdrs;
 

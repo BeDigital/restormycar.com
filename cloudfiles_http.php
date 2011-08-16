@@ -1380,25 +1380,27 @@ class CF_Http
 
     private function _process_metadata(&$hdrs,$metadata)
     {
-    	if(is_array($metadata))
-    	{
-	        foreach ($metadata as $k => $v) {
-	            if (strpos($k,":") !== False) {
-	                throw new SyntaxException(
-	                    "Metadata keys cannot contain a ':' character.");
-	            }
-	            $k = trim($k);
-	            $key = sprintf("%s%s", METADATA_HEADER, $k);
-	            if (!array_key_exists($key, $hdrs)) {
-	                if (strlen($k) > 128 || strlen($v) > 256) {
-	                    $this->error_str = "Metadata key or value exceeds ";
-	                    $this->error_str .= "maximum length: ($k: $v)";
-	                    return 0;
-	                }
-	                $hdrs[] = sprintf("%s%s: %s", METADATA_HEADER, $k, trim($v));
-	            }
-	        }
-    	}
+        if(!is_array($metadata)) return $hdrs;
+
+        $added = array();
+        foreach ($metadata as $k => $v) {
+            if (strpos($k,":") !== False)
+                throw new SyntaxException(
+                    "Metadata keys cannot contain a ':' character.");
+
+            $k = trim($k);
+            $v = trim($v);
+            if (strlen($key) > 128 || strlen($v) > 256) {
+                $this->error_str = "Metadata key or value exceeds maximum length: ($key: $v)";
+                return 0;
+            }
+
+            if (array_key_exists(strtolower($k), $added))
+                continue;
+
+            $hdrs[METADATA_HEADER . $k] = $v;
+            $added[strtolower($k)] = True;
+        }
 
         return $hdrs;
     }

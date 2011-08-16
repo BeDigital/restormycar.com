@@ -1390,8 +1390,8 @@ class CF_Http
 
             $k = trim($k);
             $v = trim($v);
-            if (strlen($key) > 128 || strlen($v) > 256) {
-                $this->error_str = "Metadata key or value exceeds maximum length: ($key: $v)";
+            if (strlen($k) > 128 || strlen($v) > 256) {
+                $this->error_str = "Metadata key or value exceeds maximum length: ($k: $v)";
                 return 0;
             }
 

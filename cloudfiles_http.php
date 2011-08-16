@@ -251,7 +251,7 @@ class CF_Http
         }
         if (!$return_code) {
             $this->error_str .= ": Failed to obtain valid HTTP response.";
-            array(0,$this->error_str,array());
+            return array(0,$this->error_str,array());
         }
         if ($return_code == 401) {
             return array($return_code,"Unauthorized",array());
@@ -514,7 +514,7 @@ class CF_Http
 
         if (!$return_code) {
             $this->error_str .= ": Failed to obtain valid HTTP response.";
-            array(0,$this->error_str,0,0);
+            return array(0,$this->error_str,0,0);
         }
         if ($return_code == 404) {
             return array($return_code,"Account not found.",0,0);
@@ -559,16 +559,19 @@ class CF_Http
         $url_path = $this->_make_path("STORAGE", $container_name);
         $return_code = $this->_send_request("DEL_POST",$url_path,array(),"DELETE");
 
-        if (!$return_code) {
-            $this->error_str .= ": Failed to obtain valid HTTP response.";
-        }
-        if ($return_code == 409) {
+        switch ($return_code) {
+        case 204:
+            break;
+        case 0:
+            $this->error_str .= ": Failed to obtain valid HTTP response.";;
+            break;
+        case 409:
             $this->error_str = "Container must be empty prior to removing it.";
-        }
-        if ($return_code == 404) {
+            break;
+        case 404:
             $this->error_str = "Specified container did not exist to delete.";
-        }
-        if ($return_code != 204) {
+            break;
+        default:
             $this->error_str = "Unexpected HTTP return code: $return_code.";
         }
         return $return_code;
@@ -704,7 +707,7 @@ class CF_Http
 
         if (!$return_code) {
             $this->error_str .= ": Failed to obtain valid HTTP response.";
-            array(0,$this->error_str,0,0);
+            return array(0,$this->error_str,0,0);
         }
         if ($return_code == 404) {
             return array($return_code,"Container not found.",0,0);
@@ -865,15 +868,19 @@ class CF_Http
 
         $hdrs = $this->_metadata_headers($obj);
         $return_code = $this->_send_request("DEL_POST",$url_path,$hdrs,"POST");
-        if (!$return_code) {
+        switch ($return_code) {
+        case 202:
+            break;
+        case 0:
             $this->error_str .= ": Failed to obtain valid HTTP response.";
-            return 0;
-        }
-        if ($return_code == 404) {
+            $return_code = 0;
+            break;
+        case 404:
             $this->error_str = "Account, Container, or Object not found.";
-        }
-        if ($return_code != 202) {
+            break;
+        default:
             $this->error_str = "Unexpected HTTP return code: $return_code";
+            break;
         }
         return $return_code;
     }
@@ -956,17 +963,19 @@ class CF_Http
 			self::_process_metadata($hdrs,$metadata);
 		
         $return_code = $this->_send_request($conn_type,$url_path,$hdrs,"COPY");
-        if (!$return_code) {
+        switch ($return_code) {
+        case 201:
+            break;
+        case 0:
             $this->error_str .= ": Failed to obtain valid HTTP response.";
-            return 0;
-        }
-        if ($return_code == 404) {
+            $return_code = 0;
+            break;
+        case 404:
             $this->error_str = "Specified container/object did not exist.";
-        }
-        if ($return_code != 201) {
+            break;
+        default:
             $this->error_str = "Unexpected HTTP return code: $return_code.";
         }
-
         return $return_code;
     }
 
@@ -991,14 +1000,17 @@ class CF_Http
 
         $url_path = $this->_make_path("STORAGE", $container_name,$object_name);
         $return_code = $this->_send_request("DEL_POST",$url_path,NULL,"DELETE");
-        if (!$return_code) {
+        switch ($return_code) {
+        case 204:
+            break;
+        case 0:
             $this->error_str .= ": Failed to obtain valid HTTP response.";
-            return 0;
-        }
-        if ($return_code == 404) {
+            $return_code = 0;
+            break;
+        case 404:
             $this->error_str = "Specified container did not exist to delete.";
-        }
-        if ($return_code != 204) {
+            break;
+        default:
             $this->error_str = "Unexpected HTTP return code: $return_code.";
         }
         return $return_code;

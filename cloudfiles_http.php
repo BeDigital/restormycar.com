@@ -59,6 +59,11 @@ define("AUTH_KEY_HEADER_LEGACY", "X-Storage-Pass");
 define("AUTH_TOKEN_LEGACY", "X-Storage-Token");
 define("CDN_EMAIL", "X-Purge-Email");
 define("DESTINATION", "Destination");
+define("ETAG_HEADER", "ETag");
+define("LAST_MODIFIED_HEADER", "Last-Modified");
+define("CONTENT_TYPE_HEADER", "Content-Type");
+define("CONTENT_LENGTH_HEADER", "Content-Length");
+define("USER_AGENT_HEADER", "User-Agent");
 
 /**
  * HTTP/cURL wrapper for Cloud Files
@@ -1075,119 +1080,82 @@ class CF_Http
 
     private function _header_cb($ch, $header)
     {
-        preg_match("/^HTTP\/1\.[01] (\d{3}) (.*)/", $header, $matches);
-        if (isset($matches[1])) {
-            $this->response_status = $matches[1];
+        $header_len = strlen($header);
+
+        if (preg_match("/^(HTTP\/1\.[01]) (\d{3}) (.*)/", $header, $matches)) {
+            $this->response_status = $matches[2];
+            $this->response_reason = $matches[3];
+            return $header_len;
         }
-        if (isset($matches[2])) {
-            $this->response_reason = $matches[2];
-        }
-        if (stripos($header, CDN_ENABLED) === 0) {
-            $val = trim(substr($header, strlen(CDN_ENABLED)+1));
-            if (strtolower($val) == "true") {
-                $this->_cdn_enabled = True;
-            } elseif (strtolower($val) == "false") {
-                $this->_cdn_enabled = False;
-            } else {
-                $this->_cdn_enabled = NULL;
+
+        if (strpos($header, ":") === False)
+            return $header_len;
+        list($name, $value) = explode(":", $header, 2);
+        $value = trim($value);
+
+        switch (strtolower($name)) {
+        case strtolower(CDN_ENABLED):
+            $this->_cdn_enabled = strtolower($value) == "true";
+            break;
+        case strtolower(CDN_URI):
+            $this->_cdn_uri = $value;
+            break;
+        case strtolower(CDN_SSL_URI):
+            $this->_cdn_ssl_uri = $value;
+            break;
+        case strtolower(CDN_TTL):
+            $this->_cdn_ttl = $value;
+            break;
+        case strtolower(MANIFEST_HEADER):
+            $this->_obj_manifest = $value;
+            break;
+        case strtolower(CDN_LOG_RETENTION):
+            $this->_cdn_log_retention = strtolower($value) == "true";
+            break;
+        case strtolower(CDN_ACL_USER_AGENT):
+            $this->_cdn_acl_user_agent = $value;
+            break;
+        case strtolower(CDN_ACL_REFERRER):
+            $this->_cdn_acl_referrer = $value;
+            break;
+        case strtolower(ACCOUNT_CONTAINER_COUNT):
+            $this->_account_container_count = (float)$value+0;
+            break;
+        case strtolower(ACCOUNT_BYTES_USED):
+            $this->_account_bytes_used = (float)$value+0;
+            break;
+        case strtolower(CONTAINER_OBJ_COUNT):
+            $this->_container_object_count = (float)$value+0;
+            break;
+        case strtolower(CONTAINER_BYTES_USED):
+            $this->_container_bytes_used = (float)$value+0;
+            break;
+        case strtolower(ETAG_HEADER):
+            $this->_obj_etag = $value;
+            break;
+        case strtolower(LAST_MODIFIED_HEADER):
+            $this->_obj_last_modified = $value;
+            break;
+        case strtolower(CONTENT_TYPE_HEADER):
+            $this->_obj_content_type = $value;
+            break;
+        case strtolower(CONTENT_LENGTH_HEADER):
+            $this->_obj_content_length = (float)$value+0;
+            break;
+        case strtolower(ORIGIN_HEADER):
+            $this->_obj_headers[ORIGIN_HEADER] = $value;
+            break;
+        default:
+            if (strncasecmp($name, METADATA_HEADER_PREFIX, strlen(METADATA_HEADER_PREFIX)) == 0) {
+                $name = substr($name, strlen(METADATA_HEADER_PREFIX));
+                $this->_obj_metadata[$name] = $value;
             }
-            return strlen($header);
+            elseif ((strncasecmp($name, CONTENT_HEADER_PREFIX, strlen(CONTENT_HEADER_PREFIX)) == 0) ||
+                    (strncasecmp($name, ACCESS_CONTROL_HEADER_PREFIX, strlen(ACCESS_CONTROL_HEADER_PREFIX)) == 0)) {
+                $this->_obj_headers[$name] = $value;
+            }
         }
-        if (stripos($header, CDN_URI) === 0) {
-            $this->_cdn_uri = trim(substr($header, strlen(CDN_URI)+1));
-            return strlen($header);
-        }
-        if (stripos($header, CDN_SSL_URI) === 0) {
-            $this->_cdn_ssl_uri = trim(substr($header, strlen(CDN_SSL_URI)+1));
-            return strlen($header);
-        }
-        if (stripos($header, CDN_TTL) === 0) {
-            $this->_cdn_ttl = trim(substr($header, strlen(CDN_TTL)+1))+0;
-            return strlen($header);
-        }
-        if (stripos($header, MANIFEST_HEADER) === 0) {
-            $this->_obj_manifest = trim(substr($header, strlen(MANIFEST_HEADER)+1));
-            return strlen($header);
-        }
-        if (stripos($header, CDN_LOG_RETENTION) === 0) {
-            $this->_cdn_log_retention =
-                trim(substr($header, strlen(CDN_LOG_RETENTION)+1)) == "True" ? True : False;
-            return strlen($header);
-        }
-
-        if (stripos($header, CDN_ACL_USER_AGENT) === 0) {
-            $this->_cdn_acl_user_agent =
-                trim(substr($header, strlen(CDN_ACL_USER_AGENT)+1));
-            return strlen($header);
-        }
-
-        if (stripos($header, CDN_ACL_REFERRER) === 0) {
-            $this->_cdn_acl_referrer =
-                trim(substr($header, strlen(CDN_ACL_REFERRER)+1));
-            return strlen($header);
-        }
-        
-        if (stripos($header, ACCOUNT_CONTAINER_COUNT) === 0) {
-            $this->_account_container_count = (float) trim(substr($header,
-                    strlen(ACCOUNT_CONTAINER_COUNT)+1))+0;
-            return strlen($header);
-        }
-        if (stripos($header, ACCOUNT_BYTES_USED) === 0) {
-            $this->_account_bytes_used = (float) trim(substr($header,
-                    strlen(ACCOUNT_BYTES_USED)+1))+0;
-            return strlen($header);
-        }
-        if (stripos($header, CONTAINER_OBJ_COUNT) === 0) {
-            $this->_container_object_count = (float) trim(substr($header,
-                    strlen(CONTAINER_OBJ_COUNT)+1))+0;
-            return strlen($header);
-        }
-        if (stripos($header, CONTAINER_BYTES_USED) === 0) {
-            $this->_container_bytes_used = (float) trim(substr($header,
-                    strlen(CONTAINER_BYTES_USED)+1))+0;
-            return strlen($header);
-        }
-        if (stripos($header, METADATA_HEADER_PREFIX) === 0) {
-            # $header => X-Object-Meta-Foo: bar baz
-            $temp = substr($header, strlen(METADATA_HEADER_PREFIX));
-            # $temp => Foo: bar baz
-            $parts = explode(":", $temp);
-            # $parts[0] => Foo
-            $val = substr(strstr($temp, ":"), 1);
-            # $val => bar baz
-            $this->_obj_metadata[$parts[0]] = trim($val);
-            return strlen($header);
-        }
-        if (stripos($header, "ETag:") === 0) {
-            # $header => ETag: abc123def456...
-            $val = substr(strstr($header, ":"), 1);
-            # $val => abc123def456...
-            $this->_obj_etag = trim($val);
-            return strlen($header);
-        }
-        if (stripos($header, "Last-Modified:") === 0) {
-            $val = substr(strstr($header, ":"), 1);
-            $this->_obj_last_modified = trim($val);
-            return strlen($header);
-        }
-        if (stripos($header, "Content-Type:") === 0) {
-            $val = substr(strstr($header, ":"), 1);
-            $this->_obj_content_type = trim($val);
-            return strlen($header);
-        }
-        if (stripos($header, "Content-Length:") === 0) {
-            $val = substr(strstr($header, ":"), 1);
-            $this->_obj_content_length = (float) trim($val)+0;
-            return strlen($header);
-        }
-        if ((stripos($header, ORIGIN_HEADER) === 0) ||
-            (stripos($header, CONTENT_HEADER_PREFIX) === 0) ||
-            (stripos($header, ACCESS_CONTROL_HEADER_PREFIX) === 0)) {
-            $parts = explode(":", $header, 2);
-            $this->_obj_headers[$parts[0]] = trim($parts[1]);
-            return strlen($header);
-        }
-        return strlen($header);
+        return $header_len;
     }
 
     private function _read_cb($ch, $fd, $length)
@@ -1254,28 +1222,23 @@ class CF_Http
         if (is_array($hdrs)) {
             foreach ($hdrs as $h => $v) {
                 if (is_int($h)) {
-                    $parts = explode(":", $v);
-                    $header = $parts[0];
-                    $value = trim(substr(strstr($v, ":"), 1));
-                } else {
-                    $header = $h;
-                    $value = trim($v);
+                    list($h, $v) = explode(":", $v, 2);
                 }
 
-                if (stripos($header, AUTH_TOKEN) === 0) {
+                if (strncasecmp($h, AUTH_TOKEN, strlen(AUTH_TOKEN)) === 0) {
                     $has_stoken = True;
                 }
-                if (stripos($header, "user-agent") === 0) {
+                if (strncasecmp($h, USER_AGENT_HEADER, strlen(USER_AGENT_HEADER)) === 0) {
                     $has_uagent = True;
                 }
-                $new_headers[] = $header . ": " . $value;
+                $new_headers[] = $h . ": " . trim($v);
             }
         }
         if (!$has_stoken) {
             $new_headers[] = AUTH_TOKEN . ": " . $this->auth_token;
         }
         if (!$has_uagent) {
-            $new_headers[] = "User-Agent: " . USER_AGENT;
+            $new_headers[] = USER_AGENT_HEADER . ": " . USER_AGENT;
         }
         return $new_headers;
     }
@@ -1399,8 +1362,8 @@ class CF_Http
             array(
                 'prefix' => '',
                 'filter' => array( # key order is important, first match decides
-                    'Content-Type'               => false,
-                    'Content-Length'             => false,
+                    CONTENT_TYPE_HEADER          => false,
+                    CONTENT_LENGTH_HEADER        => false,
                     CONTENT_HEADER_PREFIX        => true,
                     ACCESS_CONTROL_HEADER_PREFIX => true,
                     ORIGIN_HEADER                => true,

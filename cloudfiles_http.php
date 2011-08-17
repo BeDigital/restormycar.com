@@ -31,12 +31,17 @@ require_once("cloudfiles_exceptions.php");
 
 define("PHP_CF_VERSION", "1.7.10");
 define("USER_AGENT", sprintf("PHP-CloudFiles/%s", PHP_CF_VERSION));
+define("MAX_HEADER_NAME_LEN", 128);
+define("MAX_HEADER_VALUE_LEN", 256);
 define("ACCOUNT_CONTAINER_COUNT", "X-Account-Container-Count");
 define("ACCOUNT_BYTES_USED", "X-Account-Bytes-Used");
 define("CONTAINER_OBJ_COUNT", "X-Container-Object-Count");
 define("CONTAINER_BYTES_USED", "X-Container-Bytes-Used");
-define("METADATA_HEADER", "X-Object-Meta-");
 define("MANIFEST_HEADER", "X-Object-Manifest");
+define("METADATA_HEADER_PREFIX", "X-Object-Meta-");
+define("CONTENT_HEADER_PREFIX", "Content-");
+define("ACCESS_CONTROL_HEADER_PREFIX", "Access-Control-");
+define("ORIGIN_HEADER", "Origin");
 define("CDN_URI", "X-CDN-URI");
 define("CDN_SSL_URI", "X-CDN-SSL-URI");
 define("CDN_ENABLED", "X-CDN-Enabled");
@@ -97,6 +102,7 @@ class CF_Http
     private $_obj_content_type;
     private $_obj_content_length;
     private $_obj_metadata;
+    private $_obj_headers;
     private $_obj_manifest;
     private $_obj_write_resource;
     private $_obj_write_string;
@@ -153,6 +159,7 @@ class CF_Http
         $this->_obj_content_length = NULL;
         $this->_obj_metadata = array();
         $this->_obj_manifest = NULL;
+        $this->_obj_headers = NULL;
         $this->_cdn_enabled = NULL;
         $this->_cdn_ssl_uri = NULL;
         $this->_cdn_uri = NULL;
@@ -802,7 +809,7 @@ class CF_Http
         $conn_type = "PUT_OBJ";
         $url_path = $this->_make_path("STORAGE", $obj->container->name,$obj->name);
 
-        $hdrs = $this->_metadata_headers($obj);
+        $hdrs = $this->_headers($obj);
 
         $etag = $obj->getETag();
         if (isset($etag)) {
@@ -858,15 +865,15 @@ class CF_Http
                 "Method argument is not a valid CF_Object.");
         }
 
-        if (!is_array($obj->metadata) && !$obj->manifest) {
-
-            $this->error_str = "Metadata array is empty.";
+        # TODO: The is_array check isn't in sync with the error message
+        if (!$obj->manifest && !(is_array($obj->metadata) || is_array($obj->headers))) {
+            $this->error_str = "Metadata and headers arrays are empty.";
             return 0;
         }
 
         $url_path = $this->_make_path("STORAGE", $obj->container->name,$obj->name);
 
-        $hdrs = $this->_metadata_headers($obj);
+        $hdrs = $this->_headers($obj);
         $return_code = $this->_send_request("DEL_POST",$url_path,$hdrs,"POST");
         switch ($return_code) {
         case 202:
@@ -902,12 +909,12 @@ class CF_Http
         if (!$return_code) {
             $this->error_str .= ": Failed to obtain valid HTTP response.";
             return array(0, $this->error_str." ".$this->response_reason,
-                NULL, NULL, NULL, NULL, array(), NULL);
+                NULL, NULL, NULL, NULL, array(), NULL, array());
         }
 
         if ($return_code == 404) {
             return array($return_code, $this->response_reason,
-                NULL, NULL, NULL, NULL, array(), NULL);
+                NULL, NULL, NULL, NULL, array(), NULL, array());
         }
         if ($return_code == 204 || $return_code == 200) {
             return array($return_code,$this->response_reason,
@@ -916,16 +923,17 @@ class CF_Http
                 $this->_obj_content_type,
                 $this->_obj_content_length,
                 $this->_obj_metadata,
-                $this->_obj_manifest);
+                $this->_obj_manifest,
+                $this->_obj_headers);
         }
         $this->error_str = "Unexpected HTTP return code: $return_code";
         return array($return_code, $this->error_str." ".$this->response_reason,
-                NULL, NULL, NULL, NULL, array(), NULL);
+                NULL, NULL, NULL, NULL, array(), NULL, array());
     }
 
     # COPY /v1/Account/Container/Object
     #
-    function copy_object($src_obj_name, $dest_obj_name, $container_name_source, $container_name_target, $metadata=NULL)
+    function copy_object($src_obj_name, $dest_obj_name, $container_name_source, $container_name_target, $metadata=NULL, $headers=NULL)
     {
         if (!$src_obj_name) {
             $this->error_str = "Object name not set.";
@@ -952,16 +960,13 @@ class CF_Http
             return 0;
         }
 
-    	$conn_type = "COPY";
+        $conn_type = "COPY";
 
         $url_path = $this->_make_path("STORAGE", $container_name_source, $src_obj_name);
         $destination = $container_name_target."/".$dest_obj_name;
 
-        $hdrs = array(DESTINATION => $destination);
-
-        if($metadata)
-            $hdrs = array_merge($hdrs,
-                self::_process_metadata($hdrs, $metadata));
+        $hdrs = self::_process_headers($metadata, $headers);
+        $hdrs[DESTINATION] = $destination;
 
         $return_code = $this->_send_request($conn_type,$url_path,$hdrs,"COPY");
         switch ($return_code) {
@@ -1142,9 +1147,9 @@ class CF_Http
                     strlen(CONTAINER_BYTES_USED)+1))+0;
             return strlen($header);
         }
-        if (stripos($header, METADATA_HEADER) === 0) {
+        if (stripos($header, METADATA_HEADER_PREFIX) === 0) {
             # $header => X-Object-Meta-Foo: bar baz
-            $temp = substr($header, strlen(METADATA_HEADER));
+            $temp = substr($header, strlen(METADATA_HEADER_PREFIX));
             # $temp => Foo: bar baz
             $parts = explode(":", $temp);
             # $parts[0] => Foo
@@ -1173,6 +1178,13 @@ class CF_Http
         if (stripos($header, "Content-Length:") === 0) {
             $val = substr(strstr($header, ":"), 1);
             $this->_obj_content_length = (float) trim($val)+0;
+            return strlen($header);
+        }
+        if ((stripos($header, ORIGIN_HEADER) === 0) ||
+            (stripos($header, CONTENT_HEADER_PREFIX) === 0) ||
+            (stripos($header, ACCESS_CONTROL_HEADER_PREFIX) === 0)) {
+            $parts = explode(":", $header, 2);
+            $this->_obj_headers[$parts[0]] = trim($parts[1]);
             return strlen($header);
         }
         return strlen($header);
@@ -1336,6 +1348,7 @@ class CF_Http
         $this->_obj_content_length = NULL;
         $this->_obj_metadata = array();
         $this->_obj_manifest = NULL;
+        $this->_obj_headers = NULL;
         $this->_obj_write_string = "";
         $this->_cdn_enabled = NULL;
         $this->_cdn_ssl_uri = NULL;
@@ -1368,37 +1381,66 @@ class CF_Http
         return implode("/",$path);
     }
 
-    private function _metadata_headers(&$obj)
+    private function _headers(&$obj)
     {
-        $hdrs = array();
+        $hdrs = self::_process_headers($obj->metadata, $obj->headers);
         if ($obj->manifest)
             $hdrs[MANIFEST_HEADER] = $obj->manifest;
 
-        return self::_process_metadata($hdrs,$obj->metadata);
+        return $hdrs;
     }
 
-    private function _process_metadata($hdrs,$metadata)
+    private function _process_headers($metadata=null, $headers=null)
     {
-        if(!is_array($metadata)) return $hdrs;
+        $rules = array(
+            array(
+                'prefix' => METADATA_HEADER_PREFIX,
+            ),
+            array(
+                'prefix' => '',
+                'filter' => array( # key order is important, first match decides
+                    'Content-Type'               => false,
+                    'Content-Length'             => false,
+                    CONTENT_HEADER_PREFIX        => true,
+                    ACCESS_CONTROL_HEADER_PREFIX => true,
+                    ORIGIN_HEADER                => true,
+                ),
+            ),
+        );
 
-        $added = array();
-        foreach ($metadata as $k => $v) {
-            if (strpos($k,":") !== False)
-                throw new SyntaxException(
-                    "Metadata keys cannot contain a ':' character.");
+        $hdrs = array();
+        $argc = func_num_args();
+        $argv = func_get_args();
+        for ($argi = 0; $argi < $argc; $argi++) {
+            if(!is_array($argv[$argi])) continue;
 
-            $k = trim($k);
-            $v = trim($v);
-            if (strlen($k) > 128 || strlen($v) > 256)
-                throw new SyntaxException(
-                    sprintf("Metadata key or value exceeds maximum length: %s: %d/%d",
-                        $k, strlen($k), strlen($v)));
+            $rule = $rules[$argi];
+            foreach ($argv[$argi] as $k => $v) {
+                $k = trim($k);
+                $v = trim($v);
+                if (strpos($k, ":") !== False) throw new SyntaxException(
+                    "Header names cannot contain a ':' character.");
 
-            if (array_key_exists(strtolower($k), $added))
-                continue;
+                if (array_key_exists('filter', $rule)) {
+                    $result = null;
+                    foreach ($rule['filter'] as $p => $f) {
+                        if (strncasecmp($k, $p, strlen($p)) == 0) {
+                            $result = $f;
+                            break;
+                        }
+                    }
+                    if (!$result) throw new SyntaxException(sprintf(
+                        "Header name %s is not allowed", $k));
+                }
 
-            $hdrs[METADATA_HEADER . $k] = $v;
-            $added[strtolower($k)] = True;
+                $k = $rule['prefix'] . $k;
+                if (strlen($k) > MAX_HEADER_NAME_LEN || strlen($v) > MAX_HEADER_VALUE_LEN)
+                    throw new SyntaxException(sprintf(
+                        "Header %s exceeds maximum length: %d/%d",
+                            $k, strlen($k), strlen($v)));
+
+                $hdrs[$k] = $v;
+            }
         }
 
         return $hdrs;

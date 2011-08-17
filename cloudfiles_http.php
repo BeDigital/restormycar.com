@@ -29,7 +29,7 @@
  */
 require_once("cloudfiles_exceptions.php");
 
-define("PHP_CF_VERSION", "1.7.10");
+define("PHP_CF_VERSION", "1.8.0");
 define("USER_AGENT", sprintf("PHP-CloudFiles/%s", PHP_CF_VERSION));
 define("MAX_HEADER_NAME_LEN", 128);
 define("MAX_HEADER_VALUE_LEN", 256);

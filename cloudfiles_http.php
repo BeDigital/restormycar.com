@@ -1108,7 +1108,7 @@ class CF_Http
             $this->_cdn_ssl_uri = $value;
             break;
         case strtolower(CDN_STREAMING_URI):
-            $this->_cdn_ssl_uri = $value;
+            $this->_cdn_streaming_uri = $value;
             break;
         case strtolower(CDN_TTL):
             $this->_cdn_ttl = $value;
@@ -1320,6 +1320,7 @@ class CF_Http
         $this->_obj_manifest = NULL;
         $this->_obj_headers = NULL;
         $this->_obj_write_string = "";
+        $this->_cdn_streaming_uri = NULL;
         $this->_cdn_enabled = NULL;
         $this->_cdn_ssl_uri = NULL;
         $this->_cdn_uri = NULL;

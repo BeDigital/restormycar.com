@@ -971,8 +971,8 @@ class CF_Http
 
         $conn_type = "COPY";
 
-        $url_path = $this->_make_path("STORAGE", $container_name_source, $src_obj_name);
-        $destination = $container_name_target."/".$dest_obj_name;
+        $url_path = $this->_make_path("STORAGE", $container_name_source, rawurlencode($src_obj_name));
+        $destination = rawurlencode($container_name_target."/".$dest_obj_name);
 
         $hdrs = self::_process_headers($metadata, $headers);
         $hdrs[DESTINATION] = $destination;

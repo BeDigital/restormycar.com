@@ -1471,11 +1471,11 @@ class CF_Container
      * @return array array of strings
      * @throws InvalidResponseException unexpected response
      */
-    function get_objects($limit=0, $marker=NULL, $prefix=NULL, $path=NULL)
+    function get_objects($limit=0, $marker=NULL, $prefix=NULL, $path=NULL, $delimiter=NULL)
     {
         list($status, $reason, $obj_array) =
             $this->cfs_http->get_objects($this->name, $limit,
-                $marker, $prefix, $path);
+                $marker, $prefix, $path, $delimiter);
         #if ($status == 401 && $this->_re_auth()) {
         #    return $this->get_objects($limit, $marker, $prefix, $path);
         #}
@@ -1485,12 +1485,14 @@ class CF_Container
         }
         $objects = array();
         foreach ($obj_array as $obj) {
+          if(!isset($obj['subdir'])) {
             $tmp = new CF_Object($this, $obj["name"], False, False);
             $tmp->content_type = $obj["content_type"];
             $tmp->content_length = (float) $obj["bytes"];
             $tmp->set_etag($obj["hash"]);
             $tmp->last_modified = $obj["last_modified"];
             $objects[] = $tmp;
+          }
         }
         return $objects;
     }

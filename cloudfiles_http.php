@@ -1338,12 +1338,9 @@ class CF_Http
         case "CDN":
             $path[] = $this->cdnm_url; break;
         }
-        if ($c == "0")
+        if ($c != "") {
             $path[] = rawurlencode($c);
-
-        if ($c) {
-            $path[] = rawurlencode($c);
-        }
+    	}
         if ($o) {
             # mimic Python''s urllib.quote() feature of a "safe" '/' character
             #

@@ -650,7 +650,12 @@ class CF_Http
     #
     function get_objects($cname,$limit=0,$marker=NULL,$prefix=NULL,$path=NULL,$delimiter=NULL)
     {
-        if (!$cname) {
+        if ($cname == "") {
+            $this->error_str = "Container name not set.";
+            return array(0, $this->error_str, array());
+        }
+        
+        if ($cname != "0" and !isset($cname)) {
             $this->error_str = "Container name not set.";
             return array(0, $this->error_str, array());
         }

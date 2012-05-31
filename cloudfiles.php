@@ -921,7 +921,7 @@ class CF_Container
     public $name;
     public $object_count;
     public $bytes_used;
-
+    public $metadata;
     public $cdn_enabled;
     public $cdn_streaming_uri;
     public $cdn_ssl_uri;
@@ -959,6 +959,7 @@ class CF_Container
         $this->name = $name;
         $this->object_count = $count;
         $this->bytes_used = $bytes;
+        $this->metadata = array();
         $this->cdn_enabled = NULL;
         $this->cdn_uri = NULL;
         $this->cdn_ssl_uri = NULL;
@@ -2461,6 +2462,7 @@ class CF_Object
      * $obj->purge_from_cdn();
      * # or 
      * $obj->purge_from_cdn("user1@domain.com,user2@domain.com");
+     * </code>
      * @returns boolean True if successful
      * @throws CDNNotEnabledException if CDN Is not enabled on this connection
      * @throws InvalidResponseException if the response expected is not returned
@@ -2566,6 +2568,27 @@ class CF_Object
         $this->headers = $headers;
         $this->manifest = $manifest;
         return True;
+    }
+     /**
+     * Generate a Temp Url for a object
+     * Example:
+     * <code>
+     * # ... authentication code excluded (see previous examples) ...
+     * $conn = new CF_Connection($auth);
+     * $container = $conn->get_container("foo");
+     * $obj = $container->get_object("foo");
+     * $obj->get_tmp_url("shared secret, $expire_time_in_seconds, "HTTP_METHOD"
+     * </code>
+     * @returns The temp url
+     */
+    public function get_temp_url($key, $expires, $method)
+    {
+        
+        $expires += time();
+        $url = $this->container->cfs_http->getStorageUrl() .  '/' . $this->container->name . '/' . $this->name;
+        return $url . '?temp_url_sig=' . hash_hmac('sha1', strtoupper($method) .
+               "\n" . $expires . "\n" . parse_url($url, PHP_URL_PATH), $key) .
+               '&temp_url_expires=' . $expires;
     }
 
     #private function _re_auth()

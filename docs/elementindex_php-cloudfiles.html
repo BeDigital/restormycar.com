@@ -13,8 +13,8 @@
   <tr>
     <td class="header_menu">
         
-                                                        
-                                                  		  [ <a href="classtrees_php-cloudfiles.html" class="menu">class tree: php-cloudfiles</a> ]
+                                    
+                                                                      		  [ <a href="classtrees_php-cloudfiles.html" class="menu">class tree: php-cloudfiles</a> ]
 		  [ <a href="elementindex_php-cloudfiles.html" class="menu">index: php-cloudfiles</a> ]
 		  	    [ <a href="elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -26,21 +26,23 @@
   <tr valign="top">
     <td width="200" class="menu">
 	<div id="ric">
-					<p><a href="ric_README.html">README</a></p>
-					<p><a href="ric_Changelog.html">Changelog</a></p>
 					<p><a href="ric_AUTHORS.html">AUTHORS</a></p>
+					<p><a href="ric_README.html">README</a></p>
 					<p><a href="ric_COPYING.html">COPYING</a></p>
+					<p><a href="ric_Changelog.html">Changelog</a></p>
 			</div>
       <b>Packages:</b><br />
-              <a href="li_php-cloudfiles-http.html">php-cloudfiles-http</a><br />
               <a href="li_php-cloudfiles.html">php-cloudfiles</a><br />
               <a href="li_php-cloudfiles-exceptions.html">php-cloudfiles-exceptions</a><br />
+              <a href="li_php-cloudfiles-http.html">php-cloudfiles-http</a><br />
             <br /><br />
                         <b>Files:</b><br />
       	  <div class="package">
 			<a href="php-cloudfiles/_cloudfiles.php.html">		cloudfiles.php
 		</a><br>
-	  </div><br />
+			<a href="php-cloudfiles/_test.php.html">		test.php
+		</a><br>
+	  </div><br />
       
       
             <b>Classes:</b><br />
@@ -49,7 +51,7 @@
 	    		<a href="php-cloudfiles/CF_Connection.html">CF_Connection</a><br />
 	    		<a href="php-cloudfiles/CF_Container.html">CF_Container</a><br />
 	    		<a href="php-cloudfiles/CF_Object.html">CF_Object</a><br />
-	  </div>
+	  </div>
                 </td>
     <td>
       <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
@@ -71,6 +73,7 @@
 	[ <a href="elementindex_php-cloudfiles.html#p">p</a> ]
 	[ <a href="elementindex_php-cloudfiles.html#r">r</a> ]
 	[ <a href="elementindex_php-cloudfiles.html#s">s</a> ]
+	[ <a href="elementindex_php-cloudfiles.html#t">t</a> ]
 	[ <a href="elementindex_php-cloudfiles.html#u">u</a> ]
 	[ <a href="elementindex_php-cloudfiles.html#w">w</a> ]
 	[ <a href="elementindex_php-cloudfiles.html#_">_</a> ]
@@ -169,7 +172,7 @@
 							<dt><b>$content_type</b></dt>
 				<dd>in file cloudfiles.php, variable <a href="php-cloudfiles/CF_Object.html#var$content_type">CF_Object::$content_type</a></dd>
 							<dt><b>CF_Authentication</b></dt>
-				<dd>in file cloudfiles.php, class <a href="php-cloudfiles/CF_Authentication.html">CF_Authentication</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Class for handling Cloud Files Authentication, call it's <a href="php-cloudfiles-http/CF_Http.html#methodauthenticate">authenticate()</a>  method to obtain authorized service urls and an authentication token.</dd>
+				<dd>in file cloudfiles.php, class <a href="php-cloudfiles/CF_Authentication.html">CF_Authentication</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Class for handling Cloud Files Authentication, call it's authenticate()  method to obtain authorized service urls and an authentication token.</dd>
 							<dt><b>CF_Connection</b></dt>
 				<dd>in file cloudfiles.php, class <a href="php-cloudfiles/CF_Connection.html">CF_Connection</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Class for establishing connections to the Cloud Files storage system.</dd>
 							<dt><b>CF_Container</b></dt>
@@ -240,6 +243,8 @@
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Container.html#methodget_object">CF_Container::get_object()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return an Object instance for the remote storage Object</dd>
 							<dt><b>get_objects</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Container.html#methodget_objects">CF_Container::get_objects()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return an array of Objects</dd>
+							<dt><b>get_temp_url</b></dt>
+				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Object.html#methodget_temp_url">CF_Object::get_temp_url()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Generate a Temp Url for a object  Example:</dd>
 					</dl>
 	</div>
 	<a href="elementindex_php-cloudfiles.html#top">top</a><br>
@@ -296,6 +301,8 @@
 				<dd>in file cloudfiles.php, variable <a href="php-cloudfiles/CF_Object.html#var$manifest">CF_Object::$manifest</a></dd>
 							<dt><b>$metadata</b></dt>
 				<dd>in file cloudfiles.php, variable <a href="php-cloudfiles/CF_Object.html#var$metadata">CF_Object::$metadata</a></dd>
+							<dt><b>$metadata</b></dt>
+				<dd>in file cloudfiles.php, variable <a href="php-cloudfiles/CF_Container.html#var$metadata">CF_Container::$metadata</a></dd>
 							<dt><b>make_private</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Container.html#methodmake_private">CF_Container::make_private()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Disable the CDN sharing for this container</dd>
 							<dt><b>make_public</b></dt>
@@ -396,6 +403,16 @@
 	</div>
 	<a href="elementindex_php-cloudfiles.html#top">top</a><br>
   <hr />
+	<a name="t"></a>
+	<div>
+		<h2>t</h2>
+		<dl>
+							<dt><b>test.php</b></dt>
+				<dd>procedural page <a href="php-cloudfiles/_test.php.html">test.php</a></dd>
+					</dl>
+	</div>
+	<a href="elementindex_php-cloudfiles.html#top">top</a><br>
+  <hr />
 	<a name="u"></a>
 	<div>
 		<h2>u</h2>
@@ -421,7 +438,7 @@
 	<a href="elementindex_php-cloudfiles.html#top">top</a><br>
         <div class="credit">
 		    <hr />
-		    Documentation generated on Wed, 07 Sep 2011 15:19:49 -0500 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+		    Documentation generated on Thu, 31 May 2012 05:57:17 -0500 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.1</a>
 	      </div>
       </td></tr></table>
     </td>

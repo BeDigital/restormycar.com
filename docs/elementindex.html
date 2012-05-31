@@ -23,15 +23,15 @@
   <tr valign="top">
     <td width="200" class="menu">
 	<div id="ric">
-					<p><a href="ric_README.html">README</a></p>
-					<p><a href="ric_Changelog.html">Changelog</a></p>
 					<p><a href="ric_AUTHORS.html">AUTHORS</a></p>
+					<p><a href="ric_README.html">README</a></p>
 					<p><a href="ric_COPYING.html">COPYING</a></p>
+					<p><a href="ric_Changelog.html">Changelog</a></p>
 			</div>
       <b>Packages:</b><br />
-              <a href="li_php-cloudfiles-http.html">php-cloudfiles-http</a><br />
               <a href="li_php-cloudfiles.html">php-cloudfiles</a><br />
               <a href="li_php-cloudfiles-exceptions.html">php-cloudfiles-exceptions</a><br />
+              <a href="li_php-cloudfiles-http.html">php-cloudfiles-http</a><br />
             <br /><br />
                 </td>
     <td>
@@ -54,6 +54,7 @@
 	[ <a href="elementindex.html#p">p</a> ]
 	[ <a href="elementindex.html#r">r</a> ]
 	[ <a href="elementindex.html#s">s</a> ]
+	[ <a href="elementindex.html#t">t</a> ]
 	[ <a href="elementindex.html#u">u</a> ]
 	[ <a href="elementindex.html#w">w</a> ]
 	[ <a href="elementindex.html#_">_</a> ]
@@ -77,6 +78,10 @@
 				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#defineACCOUNT_BYTES_USED">ACCOUNT_BYTES_USED</a></dd>
 							<dt><b>ACCOUNT_CONTAINER_COUNT</b></dt>
 				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#defineACCOUNT_CONTAINER_COUNT">ACCOUNT_CONTAINER_COUNT</a></dd>
+							<dt><b>ACCOUNT_KEY</b></dt>
+				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#defineACCOUNT_KEY">ACCOUNT_KEY</a></dd>
+							<dt><b>ACCOUNT_METADATA_HEADER_PREFIX</b></dt>
+				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#defineACCOUNT_METADATA_HEADER_PREFIX">ACCOUNT_METADATA_HEADER_PREFIX</a></dd>
 							<dt><b>acl_referrer</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Container.html#methodacl_referrer">CF_Container::acl_referrer()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Enable ACL restriction by referer for this container.</dd>
 							<dt><b>acl_user_agent</b></dt>
@@ -178,7 +183,7 @@
 							<dt><b>CDN_URI</b></dt>
 				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#defineCDN_URI">CDN_URI</a></dd>
 							<dt><b>CF_Authentication</b></dt>
-				<dd>in file cloudfiles.php, class <a href="php-cloudfiles/CF_Authentication.html">CF_Authentication</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Class for handling Cloud Files Authentication, call it's <a href="php-cloudfiles-http/CF_Http.html#methodauthenticate">authenticate()</a>  method to obtain authorized service urls and an authentication token.</dd>
+				<dd>in file cloudfiles.php, class <a href="php-cloudfiles/CF_Authentication.html">CF_Authentication</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Class for handling Cloud Files Authentication, call it's authenticate()  method to obtain authorized service urls and an authentication token.</dd>
 							<dt><b>CF_Connection</b></dt>
 				<dd>in file cloudfiles.php, class <a href="php-cloudfiles/CF_Connection.html">CF_Connection</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Class for establishing connections to the Cloud Files storage system.</dd>
 							<dt><b>CF_Container</b></dt>
@@ -203,6 +208,8 @@
 				<dd>in file cloudfiles_exceptions.php, class <a href="php-cloudfiles-exceptions/ConnectionNotOpenException.html">ConnectionNotOpenException</a></dd>
 							<dt><b>CONTAINER_BYTES_USED</b></dt>
 				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#defineCONTAINER_BYTES_USED">CONTAINER_BYTES_USED</a></dd>
+							<dt><b>CONTAINER_METADATA_HEADER_PREFIX</b></dt>
+				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#defineCONTAINER_METADATA_HEADER_PREFIX">CONTAINER_METADATA_HEADER_PREFIX</a></dd>
 							<dt><b>CONTAINER_OBJ_COUNT</b></dt>
 				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#defineCONTAINER_OBJ_COUNT">CONTAINER_OBJ_COUNT</a></dd>
 							<dt><b>CONTENT_HEADER_PREFIX</b></dt>
@@ -218,9 +225,9 @@
 							<dt><b>copy_object_to</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Container.html#methodcopy_object_to">CF_Container::copy_object_to()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Copy a remote storage Object to a target Container</dd>
 							<dt><b>create_container</b></dt>
-				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methodcreate_container">CF_Http::create_container()</a></dd>
-							<dt><b>create_container</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Connection.html#methodcreate_container">CF_Connection::create_container()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Create a Container</dd>
+							<dt><b>create_container</b></dt>
+				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methodcreate_container">CF_Http::create_container()</a></dd>
 							<dt><b>create_object</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Container.html#methodcreate_object">CF_Container::create_object()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Create a new remote storage Object</dd>
 							<dt><b>create_paths</b></dt>
@@ -234,15 +241,19 @@
 		<h2>d</h2>
 		<dl>
 							<dt><b>$dbug</b></dt>
-				<dd>in file cloudfiles.php, variable <a href="php-cloudfiles/CF_Connection.html#var$dbug">CF_Connection::$dbug</a></dd>
-							<dt><b>$dbug</b></dt>
 				<dd>in file cloudfiles.php, variable <a href="php-cloudfiles/CF_Authentication.html#var$dbug">CF_Authentication::$dbug</a></dd>
+							<dt><b>$dbug</b></dt>
+				<dd>in file cloudfiles.php, variable <a href="php-cloudfiles/CF_Connection.html#var$dbug">CF_Connection::$dbug</a></dd>
 							<dt><b>DEFAULT_CF_API_VERSION</b></dt>
 				<dd>in file cloudfiles.php, constant <a href="php-cloudfiles/_cloudfiles.php.html#defineDEFAULT_CF_API_VERSION">DEFAULT_CF_API_VERSION</a></dd>
-							<dt><b>delete_container</b></dt>
-				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methoddelete_container">CF_Http::delete_container()</a></dd>
+							<dt><b>DELETE_AFTER</b></dt>
+				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#defineDELETE_AFTER">DELETE_AFTER</a></dd>
+							<dt><b>DELETE_AT</b></dt>
+				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#defineDELETE_AT">DELETE_AT</a></dd>
 							<dt><b>delete_container</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Connection.html#methoddelete_container">CF_Connection::delete_container()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Delete a Container</dd>
+							<dt><b>delete_container</b></dt>
+				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methoddelete_container">CF_Http::delete_container()</a></dd>
 							<dt><b>delete_object</b></dt>
 				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methoddelete_object">CF_Http::delete_object()</a></dd>
 							<dt><b>delete_object</b></dt>
@@ -288,13 +299,15 @@
 							<dt><b>get_object</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Container.html#methodget_object">CF_Container::get_object()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return an Object instance for the remote storage Object</dd>
 							<dt><b>get_objects</b></dt>
-				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Container.html#methodget_objects">CF_Container::get_objects()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return an array of Objects</dd>
-							<dt><b>get_objects</b></dt>
 				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methodget_objects">CF_Http::get_objects()</a></dd>
+							<dt><b>get_objects</b></dt>
+				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Container.html#methodget_objects">CF_Container::get_objects()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return an array of Objects</dd>
 							<dt><b>get_object_to_stream</b></dt>
 				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methodget_object_to_stream">CF_Http::get_object_to_stream()</a></dd>
 							<dt><b>get_object_to_string</b></dt>
 				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methodget_object_to_string">CF_Http::get_object_to_string()</a></dd>
+							<dt><b>get_temp_url</b></dt>
+				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Object.html#methodget_temp_url">CF_Object::get_temp_url()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Generate a Temp Url for a object  Example:</dd>
 					</dl>
 	</div>
 	<a href="elementindex.html#top">top</a><br>
@@ -374,6 +387,8 @@
 							<dt><b>$manifest</b></dt>
 				<dd>in file cloudfiles.php, variable <a href="php-cloudfiles/CF_Object.html#var$manifest">CF_Object::$manifest</a></dd>
 							<dt><b>$metadata</b></dt>
+				<dd>in file cloudfiles.php, variable <a href="php-cloudfiles/CF_Container.html#var$metadata">CF_Container::$metadata</a></dd>
+							<dt><b>$metadata</b></dt>
 				<dd>in file cloudfiles.php, variable <a href="php-cloudfiles/CF_Object.html#var$metadata">CF_Object::$metadata</a></dd>
 							<dt><b>make_private</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Container.html#methodmake_private">CF_Container::make_private()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Disable the CDN sharing for this container</dd>
@@ -441,6 +456,10 @@
 		<dl>
 							<dt><b>PHP_CF_VERSION</b></dt>
 				<dd>in file cloudfiles_http.php, constant <a href="php-cloudfiles-http/_cloudfiles_http.php.html#definePHP_CF_VERSION">PHP_CF_VERSION</a></dd>
+							<dt><b>post_account</b></dt>
+				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methodpost_account">CF_Http::post_account()</a></dd>
+							<dt><b>post_container</b></dt>
+				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methodpost_container">CF_Http::post_container()</a></dd>
 							<dt><b>public_ssl_uri</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Object.html#methodpublic_ssl_uri">CF_Object::public_ssl_uri()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;String representation of the Object's public SSL URI</dd>
 							<dt><b>public_streaming_uri</b></dt>
@@ -450,9 +469,9 @@
 							<dt><b>purge_from_cdn</b></dt>
 				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methodpurge_from_cdn">CF_Http::purge_from_cdn()</a></dd>
 							<dt><b>purge_from_cdn</b></dt>
-				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Container.html#methodpurge_from_cdn">CF_Container::purge_from_cdn()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Purge Containers objects from CDN Cache.</dd>
-							<dt><b>purge_from_cdn</b></dt>
 				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Object.html#methodpurge_from_cdn">CF_Object::purge_from_cdn()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Purge this Object from CDN Cache.</dd>
+							<dt><b>purge_from_cdn</b></dt>
+				<dd>in file cloudfiles.php, method <a href="php-cloudfiles/CF_Container.html#methodpurge_from_cdn">CF_Container::purge_from_cdn()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Purge Containers objects from CDN Cache.</dd>
 							<dt><b>put_object</b></dt>
 				<dd>in file cloudfiles_http.php, method <a href="php-cloudfiles-http/CF_Http.html#methodput_object">CF_Http::put_object()</a></dd>
 					</dl>
@@ -517,6 +536,16 @@
 	</div>
 	<a href="elementindex.html#top">top</a><br>
   <hr />
+	<a name="t"></a>
+	<div>
+		<h2>t</h2>
+		<dl>
+							<dt><b>test.php</b></dt>
+				<dd>procedural page <a href="php-cloudfiles/_test.php.html">test.php</a></dd>
+					</dl>
+	</div>
+	<a href="elementindex.html#top">top</a><br>
+  <hr />
 	<a name="u"></a>
 	<div>
 		<h2>u</h2>
@@ -574,7 +603,7 @@
 	<a href="elementindex.html#top">top</a><br>
         <div class="credit">
 		    <hr />
-		    Documentation generated on Wed, 07 Sep 2011 15:19:52 -0500 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+		    Documentation generated on Thu, 31 May 2012 05:57:22 -0500 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.1</a>
 	      </div>
       </td></tr></table>
     </td>

@@ -29,14 +29,19 @@
  */
 require_once("cloudfiles_exceptions.php");
 
-define("PHP_CF_VERSION", "1.7.10");
+define("PHP_CF_VERSION", "1.7.11");
 define("USER_AGENT", sprintf("PHP-CloudFiles/%s", PHP_CF_VERSION));
 define("MAX_HEADER_NAME_LEN", 128);
 define("MAX_HEADER_VALUE_LEN", 256);
 define("ACCOUNT_CONTAINER_COUNT", "X-Account-Container-Count");
 define("ACCOUNT_BYTES_USED", "X-Account-Bytes-Used");
+define("ACCOUNT_KEY", "X-Account-Meta-Key");
+define("ACCOUNT_METADATA_HEADER_PREFIX", "X-Account-Meta-");
 define("CONTAINER_OBJ_COUNT", "X-Container-Object-Count");
 define("CONTAINER_BYTES_USED", "X-Container-Bytes-Used");
+define("CONTAINER_METADATA_HEADER_PREFIX", "X-Container-Meta-");
+define("DELETE_AFTER", "X-Delete-After");
+define("DELETE_AT", "X-Delete-At");
 define("MANIFEST_HEADER", "X-Object-Manifest");
 define("METADATA_HEADER_PREFIX", "X-Object-Meta-");
 define("CONTENT_HEADER_PREFIX", "Content-");
@@ -80,7 +85,6 @@ class CF_Http
     private $dbug;
     private $cabundle_path;
     private $api_version;
-
     # Authentication instance variables
     #
     private $storage_url;
@@ -99,10 +103,15 @@ class CF_Http
     private $_user_write_progress_callback_func;
     private $_write_callback_type;
     private $_text_list;
+    private $_account_metadata;
     private $_account_container_count;
     private $_account_bytes_used;
+    private $_account_key;
+    private $_container_metadata;
     private $_container_object_count;
     private $_container_bytes_used;
+    private $_obj_delete_after;
+    private $_obj_delete_at;
     private $_obj_etag;
     private $_obj_last_modified;
     private $_obj_content_type;
@@ -154,10 +163,15 @@ class CF_Http
         $this->_write_callback_type = NULL;
         $this->_text_list = array();
 	$this->_return_list = NULL;
+        $this->_account_metadata = array();
+        $this->_account_key = NULL;
         $this->_account_container_count = 0;
         $this->_account_bytes_used = 0;
+        $this->_container_metadata = array();
         $this->_container_object_count = 0;
         $this->_container_bytes_used = 0;
+        $this->_obj_delete_after = NULL;
+        $this->_obj_delete_at = NULL;
         $this->_obj_write_resource = NULL;
         $this->_obj_write_string = "";
         $this->_obj_etag = NULL;
@@ -530,16 +544,17 @@ class CF_Http
 
         if (!$return_code) {
             $this->error_str .= ": Failed to obtain valid HTTP response.";
-            return array(0,$this->error_str,0,0);
+            return array(0,$this->error_str,0,0, NULL, array());
         }
         if ($return_code == 404) {
-            return array($return_code,"Account not found.",0,0);
+            return array($return_code,"Account not found.",0,0, NULL, array());
         }
         if ($return_code == 204) {
             return array($return_code,$this->response_reason,
-                $this->_account_container_count, $this->_account_bytes_used);
+                $this->_account_container_count, $this->_account_bytes_used,
+                $this->_account_key, $this->account_metadata);
         }
-        return array($return_code,$this->response_reason,0,0);
+        return array($return_code,$this->response_reason,0,0, NULL, array());
     }
 
     # PUT /v1/Account/Container
@@ -725,16 +740,17 @@ class CF_Http
 
         if (!$return_code) {
             $this->error_str .= ": Failed to obtain valid HTTP response.";
-            return array(0,$this->error_str,0,0);
+            return array(0,$this->error_str,0,0, array());
         }
         if ($return_code == 404) {
-            return array($return_code,"Container not found.",0,0);
+            return array($return_code,"Container not found.",0,0, array());
         }
         if ($return_code == 204 || $return_code == 200) {
             return array($return_code,$this->response_reason,
-                $this->_container_object_count, $this->_container_bytes_used);
+                $this->_container_object_count, $this->_container_bytes_used,
+                $this->_container_metadata);
         }
-        return array($return_code,$this->response_reason,0,0);
+        return array($return_code,$this->response_reason,0,0, array());
     }
 
     # GET /v1/Account/Container/Object
@@ -819,7 +835,6 @@ class CF_Http
 
         $conn_type = "PUT_OBJ";
         $url_path = $this->_make_path("STORAGE", $obj->container->name,$obj->name);
-
         $hdrs = $this->_headers($obj);
 
         $etag = $obj->getETag();
@@ -865,6 +880,60 @@ class CF_Http
             return array($return_code,$this->error_str,NULL);
         }
         return array($return_code,$this->response_reason,$this->_obj_etag);
+    }
+    function post_account(&$conn)
+    {
+        if (!is_object($conn) || get_class($conn) != "CF_Connection") {
+            throw new SyntaxException(
+                "Method argument is not a valid CF_Connection object.");
+        }
+        if (!is_array($conn->metadata)) {
+            throw new SyntaxException("Metadata array is empty");
+        }
+        $return_code = $this->_send_request("DEL_POST", $this->_make_path("STORAGE"), $conn->metadata, "POST");
+        switch ($return_code) {
+        case 202:
+        case 201:
+            break;
+        case 0:
+            $this->error_str .= ": Failed to obtain valid HTTP response.";
+            $return_code = 0;
+            break;
+        case 404:
+            $this->error_str = "Account, Container, or Object not found.";
+            break;
+        default:
+            $this->error_str = "Unexpected HTTP return code: $return_code";
+            break;
+        }
+        return $return_code;
+    }
+    function post_container(&$cont)
+    {
+        if (!is_object($cont) || get_class($cont) != "CF_Container") {
+            throw new SyntaxException(
+                "Method argument is not a valid CF_Container object.");
+        }
+        if (!is_array($cont->metadata)) {
+            throw new SyntaxException("Metadata array is empty");
+        }
+        $return_code = $this->_send_request("DEL_POST", $this->_make_path("STORAGE", $cont->name), $cont->metadata, "POST");
+        switch ($return_code) {
+        case 201:
+        case 202:
+            break;
+        case 0:
+            $this->error_str .= ": Failed to obtain valid HTTP response.";
+            $return_code = 0;
+            break;
+        case 404:
+            $this->error_str = "Account, Container, or Object not found.";
+            break;
+        default:
+            $this->error_str = "Unexpected HTTP return code: $return_code";
+            break;
+        }
+        return $return_code;
     }
 
     # POST /v1/Account/Container/Object
@@ -920,12 +989,12 @@ class CF_Http
         if (!$return_code) {
             $this->error_str .= ": Failed to obtain valid HTTP response.";
             return array(0, $this->error_str." ".$this->response_reason,
-                NULL, NULL, NULL, NULL, array(), NULL, array());
+                NULL, NULL, NULL, NULL, array(), NULL, NULL, NULL, array());
         }
 
         if ($return_code == 404) {
             return array($return_code, $this->response_reason,
-                NULL, NULL, NULL, NULL, array(), NULL, array());
+                NULL, NULL, NULL, NULL, array(), NULL, NULL, NULL, array());
         }
         if ($return_code == 204 || $return_code == 200) {
             return array($return_code,$this->response_reason,
@@ -935,11 +1004,13 @@ class CF_Http
                 $this->_obj_content_length,
                 $this->_obj_metadata,
                 $this->_obj_manifest,
+                $this->_obj_delete_at,
+                $this->_obj_delete_after,
                 $this->_obj_headers);
         }
         $this->error_str = "Unexpected HTTP return code: $return_code";
         return array($return_code, $this->error_str." ".$this->response_reason,
-                NULL, NULL, NULL, NULL, array(), NULL, array());
+                NULL, NULL, NULL, NULL, array(), NULL, NULL, NULL, array());
     }
 
     # COPY /v1/Account/Container/Object
@@ -1083,7 +1154,6 @@ class CF_Http
     {
         $this->_user_write_progress_callback_func = $func_name;
     }
-
     private function _header_cb($ch, $header)
     {
         $header_len = strlen($header);
@@ -1154,6 +1224,9 @@ class CF_Http
         case strtolower(ORIGIN_HEADER):
             $this->_obj_headers[ORIGIN_HEADER] = $value;
             break;
+        case strtolower(ACCOUNT_KEY):
+            $this->_account_key = $value;
+            break;
         default:
             if (strncasecmp($name, METADATA_HEADER_PREFIX, strlen(METADATA_HEADER_PREFIX)) == 0) {
                 $name = substr($name, strlen(METADATA_HEADER_PREFIX));
@@ -1162,6 +1235,12 @@ class CF_Http
             elseif ((strncasecmp($name, CONTENT_HEADER_PREFIX, strlen(CONTENT_HEADER_PREFIX)) == 0) ||
                     (strncasecmp($name, ACCESS_CONTROL_HEADER_PREFIX, strlen(ACCESS_CONTROL_HEADER_PREFIX)) == 0)) {
                 $this->_obj_headers[$name] = $value;
+            }
+            elseif (strncasecmp($name, ACCOUNT_METADATA_HEADER_PREFIX, strlen(ACCOUNT_METADATA_HEADER_PREFIX)) == 0) {
+                $this->_account_metadata[$name] = $value;
+            }
+            elseif (strncasecmp($name, CONTAINER_METADATA_HEADER_PREFIX, strlen(CONTAINER_METADATA_HEADER_PREFIX)) == 0) {
+                $this->_container_metadata[$name] = $value;
             }
         }
         return $header_len;
@@ -1310,10 +1389,15 @@ class CF_Http
     {
         $this->_text_list = array();
 	$this->_return_list = NULL;
+        $this->_account_metadata = array();
+        $this->_account_key = NULL;
         $this->_account_container_count = 0;
         $this->_account_bytes_used = 0;
+        $this->_container_metadata = array();
         $this->_container_object_count = 0;
         $this->_container_bytes_used = 0;
+        $this->_obj_delete_at = NULL;
+        $this->_obj_delete_after = NULL;
         $this->_obj_etag = NULL;
         $this->_obj_last_modified = NULL;
         $this->_obj_content_type = NULL;

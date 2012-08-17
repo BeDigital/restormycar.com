@@ -2577,7 +2577,7 @@ class CF_Object
      * $conn = new CF_Connection($auth);
      * $container = $conn->get_container("foo");
      * $obj = $container->get_object("foo");
-     * $obj->get_tmp_url("shared secret, $expire_time_in_seconds, "HTTP_METHOD"
+     * $tempurl = $obj->get_temp_url("shared_secret", "expire_time_in_seconds", "HTTP_METHOD");
      * </code>
      * @returns The temp url
      */

@@ -2600,7 +2600,7 @@ class CF_Object
         $expires += time();
         $url = $this->container->cfs_http->getStorageUrl() .  '/' . $this->container->name . '/' . $this->name;
         $form_post = array('action' => $url, 'redirect' => $redirect, 'max_file_size' => $max_file_size, 'expires' => $expires, 'file' => $this->name);
-        $form_post['signature'] = hash_hmac('sha1', parse_url($url, PHP_URL_PATH) . "\n" . $redirect . "\n" . $max_file_size  . "\n" . $max_file_count . "\n" . $expires), $key );
+        $form_post['signature'] = hash_hmac('sha1', parse_url($url, PHP_URL_PATH) . "\n" . $redirect . "\n" . $max_file_size  . "\n" . $max_file_count . "\n" . $expires, $key );
         return $form_post;
     }
     #private function _re_auth()

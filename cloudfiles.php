@@ -2590,7 +2590,19 @@ class CF_Object
                "\n" . $expires . "\n" . parse_url($url, PHP_URL_PATH), $key) .
                '&temp_url_expires=' . $expires;
     }
+     /**
+     * Generate hidden input for form post.
+     * @returns array Returns an associative array with form post input.
+     */
+    public function get_form_post_input($key, $expires, $redirect, $max_file_size=5368709120, $max_file_count=1)
+    {
 
+        $expires += time();
+        $url = $this->container->cfs_http->getStorageUrl() .  '/' . $this->container->name . '/' . $this->name;
+        $form_post = array('action' => $url, 'redirect' => $redirect, 'max_file_size' => $max_file_size, 'expires' => $expires, 'file' => $this->name);
+        $form_post['signature'] = hash_hmac('sha1', parse_url($url, PHP_URL_PATH) . "\n" . $redirect . "\n" . $max_file_size  . "\n" . $max_file_count . "\n" . $expires), $key );
+        return $form_post;
+    }
     #private function _re_auth()
     #{
     #    $new_auth = new CF_Authentication(

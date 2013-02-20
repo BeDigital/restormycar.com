@@ -1,3 +1,12 @@
+IMPORTANT NOTE:
+The php-cloudfiles bindings are no longer being maintained and their
+use is deprecated. They will not be available after August 1, 2013.
+
+We recommend that you use the php-opencloud bindings; this supports
+all of the Rackspace cloud products, and not just Cloud Files.
+
+See http://php-opencloud.com to download or to contribute.
+
 ;; PHP Cloud Files API
 ;; ========================================================================
 ;;   This package contains the PHP API for the Cloud Files storage system.

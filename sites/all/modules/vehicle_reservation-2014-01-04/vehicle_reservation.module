@@ -1,0 +1,190 @@
+<?php
+/**
+ * This function defines the URL to the page created etc.
+ * See http://api.drupal.org/api/function/hook_menu/6
+ */
+function vehicle_reseravtion_menu() {
+  $items = array();
+  $items['vehicle_reseravtion/form'] = array(
+    'title' => t('My form'),
+    'page callback' => 'vehicle_reseravtion_form',
+    'access arguments' => array('access content'),
+    'description' => t('My form'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+/**
+ * This function gets called in the browser address bar for:
+ * "http://yourhost/vehicle_reseravtion/form" or
+ * "http://yourhost/?q=vehicle_reseravtion/form". It will generate
+ * a page with this form on it.
+ */
+function vehicle_reseravtion_form() {
+  // This form calls the form builder function via the
+  // drupal_get_form() function which takes the name of this form builder
+  // function as an argument. It returns the results to display the form.
+  return drupal_get_form('vehicle_reseravtion_my_form');
+}
+/**
+ * This function is called the "form builder". It builds the form.
+ * Notice, it takes one argument, the $form_state
+ */
+function vehicle_reseravtion_my_form($form_state) {
+    // This is the first form element. It's a textfield with a label, "Name"
+  $form = array();
+$form['personal_info'] = array(
+  '#title' => t('1. Personal Information'),
+  '#weight' => '0',
+  '#collapsed' => '1',
+  '#type' => 'fieldset',
+  '#collapsible' => '1',
+);
+$form['personal_info']['name'] = array(
+  '#weight' => '0',
+  '#required' => '1',
+  '#type' => 'textfield',
+  '#title' => t('Name'),
+);
+$form['personal_info']['phone'] = array(
+  '#weight' => '1',
+  '#required' => '1',
+  '#type' => 'textfield',
+  '#title' => t('Phone'),
+);
+$form['personal_info']['cell_phone'] = array(
+  '#weight' => '2',
+  '#required' => '1',
+  '#type' => 'textfield',
+  '#title' => t('Cell Phone'),
+);
+$form['personal_info']['email_address'] = array(
+  '#required' => '1',
+  '#size' => '32',
+  '#weight' => '3',
+  '#type' => 'textfield',
+  '#title' => t('eMail Address'),
+);
+$form['vehicle_info'] = array(
+  '#title' => t('2. Vehicle Information'),
+  '#weight' => '1',
+  '#collapsed' => '1',
+  '#type' => 'fieldset',
+  '#collapsible' => '1',
+);
+$form['vehicle_info']['year'] = array(
+  '#weight' => '0',
+  '#required' => '1',
+  '#type' => 'textfield',
+  '#title' => t('Year'),
+);
+$form['vehicle_info']['make'] = array(
+  '#weight' => '1',
+  '#required' => '1',
+  '#type' => 'textfield',
+  '#title' => t('Make'),
+);
+$form['vehicle_info']['model2'] = array(
+  '#weight' => '2',
+  '#required' => '1',
+  '#type' => 'textfield',
+  '#title' => t('Model'),
+);
+$form['vehicle_info']['engine'] = array(
+  '#required' => '0',
+  '#description' => t('Enter engine type i.e. 6 cyl 8 cyl. v8 4 cyl'),
+  '#weight' => '3',
+  '#type' => 'textfield',
+  '#title' => t('Engine Type'),
+);
+$form['vehicle_info']['license'] = array(
+  '#weight' => '4',
+  '#required' => '0',
+  '#type' => 'textfield',
+  '#title' => t('Licence Plate Number'),
+);
+$form['vehicle_info']['recurring_customer'] = array(
+  '#weight' => '5',
+  '#required' => '0',
+  '#key_type_toggled' => '0',
+  '#type' => 'radios',
+  '#options' => array(
+    'one' => t('Yes'),
+    'two' => t('No'),
+  ),
+  '#title' => t('Has this vehicle been in our shop before?'),
+);
+$form['appointment_info'] = array(
+  '#title' => t('3. Appointment Information'),
+  '#weight' => '2',
+  '#type' => 'fieldset',
+  '#collapsed' => '1',
+  '#collapsible' => '1',
+);
+$form['appointment_info']['date_one'] = array(
+  '#weight' => '0',
+  '#required' => '1',
+  '#type' => 'textfield',
+  '#title' => t('Option 1 Date'),
+);
+$form['appointment_info']['time_one'] = array(
+  '#weight' => '1',
+  '#required' => '1',
+  '#type' => 'textfield',
+  '#title' => t('Option 1 Time'),
+);
+$form['appointment_info']['date_two'] = array(
+  '#weight' => '2',
+  '#required' => '1',
+  '#type' => 'textfield',
+  '#title' => t('Option 2 Date'),
+);
+$form['appointment_info']['time_two'] = array(
+  '#weight' => '3',
+  '#required' => '1',
+  '#type' => 'textfield',
+  '#title' => t('Option 2 Time'),
+);
+$form['appointment_info']['date_three'] = array(
+  '#weight' => '4',
+  '#required' => '0',
+  '#type' => 'textfield',
+  '#title' => t('Option 3 Date'),
+);
+$form['appointment_info']['time_three'] = array(
+  '#weight' => '5',
+  '#required' => '0',
+  '#type' => 'textfield',
+  '#title' => t('Option 3 Time'),
+);
+$form['tow_required'] = array(
+  '#weight' => '3',
+  '#required' => '0',
+  '#key_type_toggled' => '0',
+  '#type' => 'radios',
+  '#options' => array(
+    'one' => t('Yes'),
+    'two' => t('No'),
+  ),
+  '#title' => t('Do you need us to tow your car to the shop?'),
+);
+$form['altl_trans'] = array(
+  '#weight' => '4',
+  '#required' => '0',
+  '#key_type_toggled' => '0',
+  '#type' => 'radios',
+  '#options' => array(
+    'one' => t('Yes'),
+    'two' => t('No'),
+  ),
+  '#title' => t('Alternate Transportation Needed?'),
+);
+$form['user_comments'] = array(
+  '#weight' => '5',
+  '#required' => '1',
+  '#type' => 'textarea',
+  '#title' => t('Service Requested - Comments'),
+);
+return $form;
+}
+

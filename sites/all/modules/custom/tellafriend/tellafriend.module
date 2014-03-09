@@ -1,0 +1,163 @@
+<?php
+/**
+ * Implements hook_block_info().
+ *
+ * This function tells drupal about our block.
+ *
+ * For more information on this function, see:
+ * http://api.drupal.org/api/drupal/modules block block.api.php/function/hook_block_info/7
+ */
+function tellafriend_block_info() {
+        // Create an array that will hold our blocks
+        $blocks = array();
+ 
+        // Create a key in our $blocks array that
+        // defines our block.  Note that the key in
+        // this array can be anything.  For this
+        // tutorial, we  use 'tellafriend_form'.
+        $blocks['tellafriend_form'] = array(
+                // 'info' is what you will see when viewing the blocks admin page.
+                // Note that we use the t() (translate) function which lets drupal
+                // translate any text passed in if needed.
+                'info' => t('Tell-A-Friend'),
+                // 'cache' how this block will be cached
+                'cache' => DRUPAL_CACHE_GLOBAL,
+        );
+ 
+        // Note, if you wanted to define multiple blocks, you 
+        // could simply define more blocks just like above.
+ 
+        // Finally, we return the $blocks array.
+        return $blocks;
+}
+ 
+/**
+ * Implements hook_block_view().
+ * 
+ * This function tells drupal how to define our block when viewed.
+ *
+ * For more information on this function, see:
+ * http://api.drupal.org/api/drupal/modules block block.api.php/function/hook_block_view/7
+ */
+function tellafriend_block_view($delta = '') {
+        // Create an array that will be returned as our block
+        $block = array();
+ 
+        // Since hook_block_view is called for every block,
+        // Drupal passes in $delta (the key of the blocks defined
+        // in hook_block_info.  In our case, we're checking for
+        // $delta to be 'tellafriend_form'.
+        switch($delta) {
+                case 'tellafriend_form':
+                        // Since this $delta matches our case, we'll define
+                        // the subject and contents.
+ 
+                        // 'subject' can be blank ('') or anything you wish to define.
+                        $block['subject'] = t('Tell A Friend');
+ 
+                        // 'content' are just that, the contents of the block.
+                        // In our case, we will be showing a form.
+                        // We use drupal_get_form() to return a drupal-built form.
+                        // Note that the parameter passed to drupal_get_form is the name
+                        // of the function we will build below to define our form.
+                        // This can be any function name we define below.
+                        $block['content'] = drupal_get_form('tellafriend_form');
+                break;
+        }
+ 
+        // Finally, we return the $block array.
+        return $block;
+}
+ 
+/**
+ * Define the form to be returned.
+ *
+ * Note that drupal passes in two parameters,
+ * $form - which holds all of the elements of the form
+ * $form_state - a special array of settings & values needed by Drupal
+ */
+function tellafriend_form($form, &$form_state) {
+        // Now the fun begins.  For this simple example,
+        // we will only provide two form elements.
+        // 1. an input for the friend's email address
+        // 2. a submit button
+        // You can add as much or as little to this form as
+        // needed.  See the forms api for all possible elements.
+ 
+        $form['friends_email'] = array(
+                // #type tells drupal what kind of element to build
+                '#type' => 'textfield',
+                // we want this field to be required
+                '#required' => TRUE,
+                // The email form field size
+		'#size' => '30',
+		// The "label" for this field
+                '#title' => t(" eMail address"),
+                // Optional description
+                '#description' => t('Must be a valid email address'),
+        );
+ 
+        $form['submit'] = array(
+                '#type' => 'submit',
+                // #value is the text to display inside the button
+                '#value' => t('Submit'),
+        );
+ 
+        return $form;
+}
+ 
+/*
+ * Define a validation function that drupal will
+ * automatically call when the submit button is pressed.
+ *
+ * For this example, I will use the valid_email_address()
+ * function to verify that the email address looks
+ * proper.  If it's not, we'll use form_set_error()
+ * function to tell drupal we didn't pass validation.
+ */
+function tellafriend_form_validate($form, &$form_state) {
+        // Drupal stows away all of the form elements into
+        // $form_state['values'].  We find our 'friends_email'
+        // element and assign it to a variable for easy
+        // reference.
+        $email = $form_state['values']['friends_email'];
+ 
+        // If it's not a valid email, set an error.
+        if(valid_email_address($email) == 0) {
+                // form_set_error() tells drupal that it should not proceed.
+                // The first parameter is the form element that didn't pass
+                // validation.  The second is the message to tell the user.
+                form_set_error('friends_email', t('Not a valid email address'));
+        }
+}
+ 
+/*
+ * Define a submit funciton that drupal will
+ * automatically call when submit is pressed (and all validators pass)
+ */
+function tellafriend_form_submit($form, &$form_state) {
+        // Get the email value again
+        $email = $form_state['values']['friends_email'];
+        // Now we call drupal_mail() to send a message to this person.
+        // Note that this basically tells drupal to call tellafriend_mail().
+        $message = drupal_mail('tellafriend', 'notify', $email, language_default());
+        // Check the message results and let the user know if php was able to sent the email.
+        if(!empty($message['result'])) {
+                drupal_set_message(t('You just told your friend about us!'));
+        } else {
+                drupal_set_message(t('There was a problem sending your message', 'error'));
+        }
+}
+ 
+/**
+ * Implements hook_mail().
+ */
+function tellafriend_mail($key, &$message, $params) {
+        // Get the url for this site
+        global $base_url;
+        // Set the subject for this email.
+        $message['subject'] = t('Your friend thought you might like this site');
+       // Set the body. Note how we use a token in the t() function to hold our
+        // link (!link) and then tell drupal the !link = $base_url.
+        $message['body'][] = t("Hello,\nYour friend thought you might like this site.  Please click the link below to visit.\n\n!link", array('!link' => $base_url));
+}

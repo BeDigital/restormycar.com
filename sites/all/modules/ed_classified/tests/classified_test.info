@@ -1,0 +1,13 @@
+name = "Classified Ads Test"
+description = "Support module for Classified Ads tests."
+package = Classified
+
+core = 7.x
+hidden = TRUE
+
+; Information added by drupal.org packaging script on 2013-08-04
+version = "7.x-3.1-beta1"
+core = "7.x"
+project = "ed_classified"
+datestamp = "1375630270"
+

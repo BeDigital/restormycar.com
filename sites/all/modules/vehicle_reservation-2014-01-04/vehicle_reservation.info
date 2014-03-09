@@ -1,0 +1,5 @@
+name = Vehicle Reservation Form
+description = Creates a form that will gathers vehicle, customer information and suggest apointment date and time for Patterson-Brothers Collision and Restoration.
+core = 7.x
+package = Custom
+#project = "patterson"

@@ -1,0 +1,3 @@
+name = Vehicle Appointment Reservation
+description = Vehicle Appointment and Reservation Module for Drupal form api Patterson-Brothers Collision and Restoration.
+core = 7.x

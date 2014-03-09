@@ -1,0 +1,45 @@
+<?php
+/**
+ * This function defines the URL to the page created etc.
+ * See http://api.drupal.org/api/function/hook_menu/6
+ */
+function vehicle_appointment_menu() {
+  $items = array();
+  $items['vehicle_appointment/form'] = array(
+    'title' => t('Vehicle Appointment Reservation Form'),
+    'page callback' => 'vehicle_appointment_form',
+    'access arguments' => array('access content'),
+    'description' => t('Vehicle Appointment Reservation Form'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+/**
+ * This function gets called in the browser address bar for:
+ * "http://yourhost/vehicle_appointment/form" or
+ * "http://yourhost/?q=vehicle_appointment/form". It will generate
+ * a page with this form on it.
+ */
+function vehicle_appointment_form() {
+  // This form calls the form builder function via the
+  // drupal_get_form() function which takes the name of this form builder
+  // function as an argument. It returns the results to display the form.
+  return drupal_get_form('vehicle_appointment_reservation_form');
+}
+/**
+ * This function is called the "form builder". It builds the form.
+ * Notice, it takes one argument, the $form_state
+ */
+function vehicle_appointment_reservation_form($form_state) {
+    // This is the first form element. It's a textfield with a label, "Name"
+  $form['name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Name'),
+  );
+  // Adds a simple submit button that refreshes the form and clears its contents -- this is the default behavior for forms.
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Submit',
+  );
+  return $form;
+}

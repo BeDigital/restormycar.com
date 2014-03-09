@@ -1,0 +1,3 @@
+core = "7.x"
+description = "An example module used to learn more about module development and forms creation. November 03, 2013"
+name = "Appointment Form Module"

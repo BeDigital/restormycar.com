@@ -1,0 +1,4 @@
+name = Tell A Friend
+description = Creates a form that will send an email to a friend with the url to this site.
+core = 7.x
+package = Custom

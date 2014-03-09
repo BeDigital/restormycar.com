@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ignore configuration files that may contain sensitive information.
 sites/*/*settings*.php
 
@@ -35,3 +36,8 @@ xmlrpc.php
 /profiles
 /scripts
 /themes
+=======
+*.swp
+*~
+tests/output.log
+>>>>>>> 630ca3634d6457801958f06634ca300b3d71d18a

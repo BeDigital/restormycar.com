@@ -31,7 +31,7 @@ See http://php-opencloud.com to download or to contribute.
 ;; ------------------------------------------------------------------------
 ;;   For sample code, please see the tests and API docs.
 ;;
-;; Docs
+;;; Docs
 ;; ------------------------------------------------------------------------
 ;;   The included documentation was generated directly from the source
 ;;   code files using the PHPDocumentor tool.
